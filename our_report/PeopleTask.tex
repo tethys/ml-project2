@@ -1,36 +1,16 @@
 \subsection{Data Description}
-The training data $Xtrain$ contains 1400 observations, each 43 dimensional. One training sample has 36 real valued features and 7 categorical features. Our task is to predict the values for unseen test data, consisting in 600 samples. We measure the accuracy of our estimation using RMSE. 
+The training data $Xtrain$ contains 8545 color images of size  105x43. From every image 
+was extracted a HOG descriptor of dimension 9360.
+We notice that there are  7308 images without people and 1237 with. Our task is to evaluate various classfiers. We measure the accuracy of our estimation using ROC curves. 
 
 \subsection{Data visualization and cleaning}
-Initially, our data was not centered, as seen in $Fig.$ \ref{fig:dist_regression}.
-We changed the categorical features into dummy variables, leading to a new vector of size 56. $Xtrain$ was then normalized to have 0 mean and standard deviation 1 (except the dummy variables). We applied the same operations to the test data $Xtest$ on which we will report the predicted output values.
+We assume there are no outliers, since the images 
+are manually annotated by humans...
+The HOG descriptors themselves provide a data normalization technique
 
-We plotted the correlation of every feature with respect to the output and the scatter plots did not look random. We concluded the features explain the output, but we could not tell if one of them is insignificant.
-
-The predicted values are real values in $[1000,7000]$ and seemed to be grouped into two blobs. We believed initially the smaller blob represented outliers, but since it contained almost $10\%$ of the data we decided not to ignore it.
-
-After looking at every feature individually, we noticed that feature 36 offers a clear separation of the two blobs (see $Fig.$ \ref{fig:feature36}). We therefore chose to fit two models, one in which feature 36 has values greater than $-13$ and one in which it is smaller, corresponding to smaller predicted values. We will refer to the points grouped to the left of the black vertical line in $Fig.$ \ref{fig:feature36} as the first blob or big blob model and the points to the right as the small blob.
-
-
-\begin{figure}[ht]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-   \includegraphics[width=0.45\textwidth]{figures/distribution_regression_crop.pdf}
-    \caption{Mean and standard deviation for the first 36 real valued variables of Xtrain. The input is not normalised and feature 36 is the only negative one.}
-    \label{fig:dist_regression}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=0.45\textwidth]{figures/feature36_13_crop.pdf}
-    \caption{Feature 36 versus output values. X = 1.4 (black line) and y = 4900 (red line)  provide a good separation of the two blobs.}
-    \label{fig:feature36}
-  \end{subfigure}
-  \caption{Data visualization}
-\end{figure}
-
-We visually observed some linear correlations between certain features such as feature 2 and 24, 13 and 16, 17 and 20, but we decided to keep them since we did not have time to experiment with their removal or to test their significance. This is corroborated by the fact that $Xtrain$ is rank deficient, it has 57 columns after the use of dummy variables but rank 50.
-
-If the input is normally distributed with mean 0 and standard deviation 1, then
- $99.99\%$ of the samples appear between the values -3.891 and 3.891. We therefore remove any points that are outside this interval, considering them outliers.
+\subsection{SVM}
+\subsection{Neural Network}
+\subsection{Convolutional Neural Network}
 
 \subsection{Regression baseline methods}
 After the visualization and the analysis of the data, we applied to them the regression methods that we had implemented. More specifically, we used the least squares method (developed both using the normal equations and gradient descent) and the ridge regression method. All of them produced results of similar quality, fact that may be confirmed by the almost equal RMSE for training and test data parts, but also by the values of their resulting $beta$, which are pretty close to each other.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  1 DEC 2014 21:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  1 DEC 2014 21:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -426,7 +426,7 @@ Package pdftex.def Info: figures/Lambda_pLG.pdf used on input line 18.
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
 es/Lambda_pLG.pdf> <./figures/classification_distribution.pdf>]
-<figures/comparison_LR_pLR.pdf, id=84, 597.23125pt x 845.1575pt>
+<figures/comparison_LR_pLR.pdf, id=83, 597.23125pt x 845.1575pt>
 File: figures/comparison_LR_pLR.pdf Graphic file (type pdf)
 
 <use figures/comparison_LR_pLR.pdf>
@@ -454,107 +454,82 @@ Overfull \hbox (25.55226pt too wide) in paragraph at lines 48--54
  []
 
 ) (./PeopleTask.tex [2 <./figures/comparison_LR_pLR.pdf>]
-<figures/distribution_regression_crop.pdf, id=103, 600.5637pt x 222.59161pt>
-File: figures/distribution_regression_crop.pdf Graphic file (type pdf)
-
-<use figures/distribution_regression_crop.pdf>
-Package pdftex.def Info: figures/distribution_regression_crop.pdf used on input
- line 18.
-(pdftex.def)             Requested size: 80.48961pt x 29.83119pt.
-
-<figures/feature36_13_crop.pdf, id=104, 498.663pt x 385.92178pt>
-File: figures/feature36_13_crop.pdf Graphic file (type pdf)
-
-<use figures/feature36_13_crop.pdf>
-Package pdftex.def Info: figures/feature36_13_crop.pdf used on input line 23.
-(pdftex.def)             Requested size: 80.48961pt x 62.2905pt.
- [3 <./figures/distribution_regression_crop.pdf> <./figures/feature36_13_crop.p
-df>]
-<figures/alpha_curve1.pdf, id=126, 593.3367pt x 426.39302pt>
+<figures/alpha_curve1.pdf, id=99, 593.3367pt x 426.39302pt>
 File: figures/alpha_curve1.pdf Graphic file (type pdf)
 
 <use figures/alpha_curve1.pdf>
-Package pdftex.def Info: figures/alpha_curve1.pdf used on input line 45.
+Package pdftex.def Info: figures/alpha_curve1.pdf used on input line 21.
 (pdftex.def)             Requested size: 178.86702pt x 128.53697pt.
 
-<figures/alpha_curve2.pdf, id=127, 594.05943pt x 424.94762pt>
+<figures/alpha_curve2.pdf, id=100, 594.05943pt x 424.94762pt>
 File: figures/alpha_curve2.pdf Graphic file (type pdf)
 
 <use figures/alpha_curve2.pdf>
-Package pdftex.def Info: figures/alpha_curve2.pdf used on input line 50.
+Package pdftex.def Info: figures/alpha_curve2.pdf used on input line 26.
 (pdftex.def)             Requested size: 178.86702pt x 127.94563pt.
 
-<figures/lambda_curve1.pdf, id=130, 594.05943pt x 423.50221pt>
+<figures/lambda_curve1.pdf, id=103, 594.05943pt x 423.50221pt>
 File: figures/lambda_curve1.pdf Graphic file (type pdf)
 
 <use figures/lambda_curve1.pdf>
-Package pdftex.def Info: figures/lambda_curve1.pdf used on input line 62.
+Package pdftex.def Info: figures/lambda_curve1.pdf used on input line 38.
 (pdftex.def)             Requested size: 178.86702pt x 127.51044pt.
 
-<figures/lambda_curve2.pdf, id=131, 595.50484pt x 422.05681pt>
+<figures/lambda_curve2.pdf, id=104, 595.50484pt x 422.05681pt>
 File: figures/lambda_curve2.pdf Graphic file (type pdf)
 
 <use figures/lambda_curve2.pdf>
-Package pdftex.def Info: figures/lambda_curve2.pdf used on input line 67.
+Package pdftex.def Info: figures/lambda_curve2.pdf used on input line 43.
 (pdftex.def)             Requested size: 178.86702pt x 126.76613pt.
-
+ [3 <./figures/alpha_curve1.pdf> <./figures/alpha_curve2.pdf>]
 
 Package caption Warning: \label without proper \caption on input line 81.
 See the caption package documentation for explanation.
 
 
 LaTeX Warning: Reference `fig:learning_curve' on page 4 undefined on input line
- 76.
+ 52.
 
-<figures/learning_curve.pdf, id=133, 595.50484pt x 426.39302pt>
+<figures/learning_curve.pdf, id=125, 595.50484pt x 426.39302pt>
 File: figures/learning_curve.pdf Graphic file (type pdf)
 
 <use figures/learning_curve.pdf>
-Package pdftex.def Info: figures/learning_curve.pdf used on input line 80.
+Package pdftex.def Info: figures/learning_curve.pdf used on input line 56.
 (pdftex.def)             Requested size: 267.9747pt x 191.87508pt.
- [4 <./figures/alpha_curve1.pdf> <./figures/alpha_curve2.pdf> <./figures/lambda
-_curve1.pdf> <./figures/lambda_curve2.pdf>]
-<figures/degree_polynomial_blob1_crop.pdf, id=169, 482.04092pt x 383.75368pt>
+ [4 <./figures/lambda_curve1.pdf> <./figures/lambda_curve2.pdf> <./figures/lear
+ning_curve.pdf>]
+<figures/degree_polynomial_blob1_crop.pdf, id=154, 482.04092pt x 383.75368pt>
 File: figures/degree_polynomial_blob1_crop.pdf Graphic file (type pdf)
 
 <use figures/degree_polynomial_blob1_crop.pdf>
 Package pdftex.def Info: figures/degree_polynomial_blob1_crop.pdf used on input
- line 99.
+ line 75.
 (pdftex.def)             Requested size: 178.86702pt x 142.39651pt.
 
-<figures/degree_polynomial_blob2_crop.pdf, id=170, 489.99057pt x 377.24939pt>
+<figures/degree_polynomial_blob2_crop.pdf, id=155, 489.99057pt x 377.24939pt>
 File: figures/degree_polynomial_blob2_crop.pdf Graphic file (type pdf)
 
 <use figures/degree_polynomial_blob2_crop.pdf>
 Package pdftex.def Info: figures/degree_polynomial_blob2_crop.pdf used on input
- line 104.
+ line 80.
 (pdftex.def)             Requested size: 178.86702pt x 137.70926pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 124.
+(caption)                particular \caption on input line 100.
 See the caption package documentation for explanation.
 
-[5 <./figures/learning_curve.pdf>])
+[5 <./figures/degree_polynomial_blob1_crop.pdf> <./figures/degree_polynomial_bl
+ob2_crop.pdf>])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
- [6 <./figures/degree_polynomial_blob1_crop.pdf> <./figures/degree_polynomial_b
-lob2_crop.pdf>] [7]
+ [6]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
  (./paper.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 53.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
+Package rerunfilecheck Info: File `paper.out' has not changed.
+(rerunfilecheck)             Checksum: DD7D998BB60C121222A9B91B03EF4BA1;783.
 
-
-Package rerunfilecheck Warning: File `paper.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `paper.out':
-(rerunfilecheck)             Before: 5F448FC7A7E697FD8409D18E710E1B79;786
-(rerunfilecheck)             After:  DD7D998BB60C121222A9B91B03EF4BA1;783.
 
 LaTeX Warning: There were undefined references.
 
@@ -564,15 +539,15 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 53.
  ) 
 Here is how much of TeX's memory you used:
- 7936 strings out of 493117
- 118560 string characters out of 6135432
- 213084 words of memory out of 5000000
- 11247 multiletter control sequences out of 15000+600000
+ 7924 strings out of 493117
+ 118179 string characters out of 6135432
+ 213085 words of memory out of 5000000
+ 11239 multiletter control sequences out of 15000+600000
  21780 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,12n,39p,735b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{figure.7} has been referenced but does not exist,
- replaced by a fixed one
+pdfTeX warning (dest): name{figure.caption.6} has been referenced but does no
+t exist, replaced by a fixed one
 
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
@@ -585,10 +560,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/tex
 mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/
 fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
 1/urw/times/utmr8a.pfb>
-Output written on paper.pdf (7 pages, 268077 bytes).
+Output written on paper.pdf (6 pages, 177058 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 31 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 218 PDF objects out of 1000 (max. 8388607)
+ 180 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
