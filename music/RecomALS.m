@@ -12,7 +12,7 @@ function [U, A] = RecomALS(R, k, lambda)
  A = A';
 
 % Initialize algorithm parametes
-  maxIters = 1000;
+  maxIters = 10;
   s = 1;
   err = 1 ./ eps;
   
@@ -46,23 +46,27 @@ function [U, A] = RecomALS(R, k, lambda)
 end
 
 function cost = calcCost(R, U, A)
-    [n, m] = size(R);
-    numOfnnz = 0;
-    cost = 0.0;
-    pp =U*A;
-    for k=1:n 
-        On = find(R(k,:)~=0);
-        numOfnnz = numOfnnz + sum(On);
-        cost = cost + sum((R(k,On) - pp(k,On)).^2);
-    end
-    cost = cost / numOfnnz;
+%     [n, m] = size(R);
+%     numOfnnz = 0;
+%     cost = 0.0;
+%    pp =U*A;
+%     for k=1:n 
+%          On = find(R(k,:)~=0);
+%          numOfnnz = numOfnnz + sum(On);
+%          cost = cost + sum((R(k,On) - pp(k,On)).^2);
+%     end
+%     cost = cost/numOfnnz
+   pp =U*A;
+   nz_indices = find(R ~=0);
+   cost2 = sum((R(nz_indices) - pp(nz_indices)).^2);
+   cost = cost2 / size(nz_indices,1);
 end
 
 function A = updateA(R, U, k, lambda)
 	
-	[n,m] = size(R);
+	[~,m] = size(R);
 	lamI = lambda * eye(k);
-
+    A = zeros(k, m);
 	for i = 1:m
 		users = find(R(:,i)); % gives non-zero entries
 		Ui = U(users, :);
@@ -71,13 +75,15 @@ function A = updateA(R, U, k, lambda)
 		%X = matrix \ vector;       
 		A(:, i) = pinv(Ui'*Ui + length(users) * lamI) * Ui' * full(R(users, i));
     end
+    size(A)
 end
 
 function U = updateU(R, A, k, lambda)
 	
-	[n,m] = size(R);
+	[n,~] = size(R);
 	lamI = lambda * eye(k);
 
+    U = zeros(n, k);
 	for i = 1:n
 		artists = find(R(i,:)); % gives non-zero entries
 		Ai = A(:, artists);
