@@ -9,8 +9,10 @@ function [U, A] = RecomALS(R, k, lambda, maxIters)
 [n, m] = size(R);
  rng('default')
  U = randn(n,k);
- A = randn(m,k);
- A = A';
+ indices = R(:,1)~=0;
+ value = mean(R(indices,1));
+ A = randn(k,m);
+ A(:,1) = value;
 
 % Initialize algorithm parametes
   s = 1;
