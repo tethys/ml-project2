@@ -1,4 +1,4 @@
-function [U, A] = RecomALS(R, k, lambda)
+function [U, A] = RecomALS(R, k, lambda, maxIters)
 %
 % Alternating Least-Squares (ALS) algorithm
 % INPUT:
@@ -7,12 +7,12 @@ function [U, A] = RecomALS(R, k, lambda)
     
 % TODO: initialize matrix U(nxk), matrix A(kxm)
 [n, m] = size(R);
+ rng('default')
  U = randn(n,k);
  A = randn(m,k);
  A = A';
 
 % Initialize algorithm parametes
-  maxIters = 10;
   s = 1;
   err = 1 ./ eps;
   
@@ -75,7 +75,6 @@ function A = updateA(R, U, k, lambda)
 		%X = matrix \ vector;       
 		A(:, i) = pinv(Ui'*Ui + length(users) * lamI) * Ui' * full(R(users, i));
     end
-    size(A)
 end
 
 function U = updateU(R, A, k, lambda)
