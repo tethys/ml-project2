@@ -3,8 +3,8 @@
 %%
 function error = RMSE(Ypredicted, Ygroundtruth)
 
-nonz = nonzeros(Ypredicted);
-temp = abs(Ypredicted - Ygroundtruth);
-error =  sum(temp(:))/ length(nonz);
+nzindices = Ygroundtruth~= 0;
+temp = (Ypredicted(nzindices) - Ygroundtruth(nzindices)).^2;
+error =  sqrt(sum(temp(:))/ length(nzindices));
 
 end

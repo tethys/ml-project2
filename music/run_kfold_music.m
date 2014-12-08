@@ -1,8 +1,8 @@
 
 clear all;
 load songTrain;
-nbr_features = [10, 30, 50, 80, 100];
-alpha = [0.01,0.06, 0.1,1];
+nbr_features = [100, 30, 50, 80, 100];
+alpha = [0.06,0.06, 0.1,1];
 nbr_iterations = 10;
 K = 10;
 NF = 6;
@@ -19,7 +19,7 @@ for f_index = 1:NF
             [Ytest_weak, Ytrain_new, Gtrain_new, ...
                 Ytest_strong,Gstrong, dd,nn] = splitDataKFold(Ytrain, Gtrain,seed_value, ...
                 kfold_iter);
-            maxIters = 100;
+            maxIters = 3;
             
             Ytrain_new(Ytrain_new~=0) = log(Ytrain_new(Ytrain_new~=0));
             [U, A, train_error] = RecomExponentialALS(full(Ytrain_new), ...

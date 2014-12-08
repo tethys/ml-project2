@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  8 DEC 2014 15:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  8 DEC 2014 19:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -311,7 +311,11 @@ Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count117
 \c@subtable=\count118
 )
-No file paper.aux.
+(./paper.aux
+
+LaTeX Warning: Label `fig:starting_images' multiply defined.
+
+)
 \openout1 = `paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -329,7 +333,7 @@ LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 36.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box30
@@ -360,6 +364,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 36.
 LaTeX Info: Redefining \pageref on input line 36.
 LaTeX Info: Redefining \nameref on input line 36.
+
+(./paper.out) (./paper.out)
 \@outlinefile=\write3
 \openout3 = `paper.out'.
 
@@ -406,118 +412,55 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 40.
 
 (./MusicTask.tex
+<figures/histYtrain_crop.pdf, id=124, 485.6544pt x 403.26659pt>
+File: figures/histYtrain_crop.pdf Graphic file (type pdf)
 
-LaTeX Warning: Reference `fig:dist_classification' on page 1 undefined on input
- line 7.
+<use figures/histYtrain_crop.pdf>
+Package pdftex.def Info: figures/histYtrain_crop.pdf used on input line 23.
+(pdftex.def)             Requested size: 178.86702pt x 148.52327pt.
 
-<figures/classification_distribution.pdf, id=4, 563.70598pt x 396.76227pt>
-File: figures/classification_distribution.pdf Graphic file (type pdf)
+<figures/histLogYtrain_crop.pdf, id=125, 492.1587pt x 403.26659pt>
+File: figures/histLogYtrain_crop.pdf Graphic file (type pdf)
 
-<use figures/classification_distribution.pdf>
-Package pdftex.def Info: figures/classification_distribution.pdf used on input 
-line 12.
-(pdftex.def)             Requested size: 198.7425pt x 139.8799pt.
-
-<figures/Lambda_pLG.pdf, id=5, 597.23125pt x 845.1575pt>
-File: figures/Lambda_pLG.pdf Graphic file (type pdf)
-
-<use figures/Lambda_pLG.pdf>
-Package pdftex.def Info: figures/Lambda_pLG.pdf used on input line 18.
-(pdftex.def)             Requested size: 178.86702pt x 136.85338pt.
- [1
+<use figures/histLogYtrain_crop.pdf>
+Package pdftex.def Info: figures/histLogYtrain_crop.pdf used on input line 27.
+(pdftex.def)             Requested size: 178.86702pt x 146.56035pt.
+) (./PeopleTask.tex [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
-es/Lambda_pLG.pdf> <./figures/classification_distribution.pdf>]
-
-LaTeX Warning: Reference `fig:Lambda_pLr' on page 2 undefined on input line 29.
-
-
-
-LaTeX Warning: Reference `fig:comp_LR_pLR' on page 2 undefined on input line 34
-.
-
-
-LaTeX Warning: Reference `table:test_errors' on page 2 undefined on input line 
-36.
-
-<figures/comparison_LR_pLR.pdf, id=34, 597.23125pt x 845.1575pt>
-File: figures/comparison_LR_pLR.pdf Graphic file (type pdf)
-
-<use figures/comparison_LR_pLR.pdf>
-Package pdftex.def Info: figures/comparison_LR_pLR.pdf used on input line 41.
-(pdftex.def)             Requested size: 194.76982pt x 140.10258pt.
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 42.
-See the caption package documentation for explanation.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 50--50
-[]\OT1/ptm/m/n/10 Log-
- []
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 54.
-See the caption package documentation for explanation.
-
-
-Overfull \hbox (25.55226pt too wide) in paragraph at lines 48--54
- [][] 
- []
-
-) (./PeopleTask.tex [2 <./figures/comparison_LR_pLR.pdf>]
-
-LaTeX Warning: Reference `fig:starting_images' on page 3 undefined on input lin
-e 4.
-
-<figures/positive_image.pdf, id=51, 326.6604pt x 273.1806pt>
+es/histYtrain_crop.pdf> <./figures/histLogYtrain_crop.pdf>]
+<figures/positive_image.pdf, id=3328, 326.6604pt x 273.1806pt>
 File: figures/positive_image.pdf Graphic file (type pdf)
 
 <use figures/positive_image.pdf>
 Package pdftex.def Info: figures/positive_image.pdf used on input line 11.
 (pdftex.def)             Requested size: 178.86702pt x 149.58284pt.
 
-<figures/negative_image.pdf, id=52, 336.77818pt x 276.07141pt>
+<figures/negative_image.pdf, id=3329, 336.77818pt x 276.07141pt>
 File: figures/negative_image.pdf Graphic file (type pdf)
 
 <use figures/negative_image.pdf>
 Package pdftex.def Info: figures/negative_image.pdf used on input line 15.
 (pdftex.def)             Requested size: 178.86702pt x 146.62886pt.
- [3 <./figures/positive_image.pdf> <./figures/negative_image.pdf>]
+ [2 <./figures/positive_image.pdf> <./figures/negative_image.pdf>]
+Underfull \vbox (badness 3989) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:SVM' on page 4 undefined on input line 40.
-
-
-LaTeX Warning: Reference `table:SVM_success' on page 4 undefined on input line 
-44.
-
-
-LaTeX Warning: Reference `fig:K_NN' on page 4 undefined on input line 60.
-
-<figures/SVM.pdf, id=68, 374.3586pt x 302.08862pt>
+ [3]
+<figures/SVM.pdf, id=3360, 374.3586pt x 302.08862pt>
 File: figures/SVM.pdf Graphic file (type pdf)
  <use figures/SVM.pdf>
 Package pdftex.def Info: figures/SVM.pdf used on input line 65.
 (pdftex.def)             Requested size: 194.76982pt x 157.17456pt.
 
-<figures/K_NN.pdf, id=69, 508.7808pt x 413.3844pt>
+<figures/K_NN.pdf, id=3361, 508.7808pt x 413.3844pt>
 File: figures/K_NN.pdf Graphic file (type pdf)
  <use figures/K_NN.pdf>
 Package pdftex.def Info: figures/K_NN.pdf used on input line 70.
 (pdftex.def)             Requested size: 194.76982pt x 158.25462pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 )
-Underfull \vbox (badness 1360) has occurred while \output is active []
-
- [4]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
 
-[5 <./figures/SVM.pdf> <./figures/K_NN.pdf>]
+[4 <./figures/SVM.pdf> <./figures/K_NN.pdf>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
  (./paper.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 53.
@@ -529,27 +472,62 @@ Package rerunfilecheck Warning: File `paper.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `paper.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7934ED76C7A5DB0FE3AF95EB5948B719;1117.
+(rerunfilecheck)             Before: 00210B9605F8E3300E709CAEF4EAAED6;1997
+(rerunfilecheck)             After:  075DD85407A3FBDA1B5BABD33DA1266C;1422.
 
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 53.
  ) 
 Here is how much of TeX's memory you used:
- 7878 strings out of 493117
- 117077 string characters out of 6135432
- 213475 words of memory out of 5000000
- 11202 multiletter control sequences out of 15000+600000
- 21780 words of font info for 53 fonts, out of 8000000 for 9000
+ 7900 strings out of 493117
+ 117471 string characters out of 6135432
+ 211475 words of memory out of 5000000
+ 11211 multiletter control sequences out of 15000+600000
+ 18678 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,12n,39p,652b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texl
+ 37i,8n,39p,655b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsection.1.9} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.8.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.1.8} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.7.4} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.7.3} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.7.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.7.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.1.7} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.1.6} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.5.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.4.4} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.4.3} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.1.4.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
 ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
 e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
 014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
@@ -557,10 +535,10 @@ e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
 /texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-d
 ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb>
-Output written on paper.pdf (5 pages, 394006 bytes).
+Output written on paper.pdf (4 pages, 1168708 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 97 compressed objects within 1 object stream
- 29 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3412 PDF objects out of 3580 (max. 8388607)
+ 202 compressed objects within 3 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 271 words of extra memory for PDF output out of 10000 (max. 10000000)
 
