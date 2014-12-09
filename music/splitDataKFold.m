@@ -1,5 +1,5 @@
 function [Ytest_weak, Ytrain_new, Gtrain_new, Ytest_strong,Gstrong, dd,nn] = splitDataKFold(Ytrain, Gtrain,seed_value, ...
-                                                                                            kfold_iter)
+                                                                                            kfold_iter, K)
 
 % The following script creates two kinds of test sets
 % Ytest_strong contains pairs for new users to test (the non-zero entries).
@@ -14,7 +14,6 @@ function [Ytest_weak, Ytrain_new, Gtrain_new, Ytest_strong,Gstrong, dd,nn] = spl
 setSeed(seed_value);
 nbr_users = size(Ytrain,1);
 idx = randperm(nbr_users);
-K = 10;
 nTe = floor(nbr_users/K); 
 NK = nTe;
 for k=1:K

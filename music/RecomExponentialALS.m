@@ -42,7 +42,7 @@ function cost = calcCost(R, U, A)
    pp = U*A;
    nz_indices = find(R ~= 0);
    cost = sum((exp(R(nz_indices) - pp(nz_indices))).^2);
-   cost = cost / size(nz_indices,1);
+   cost = sqrt(cost / size(nz_indices,1));
 end
 
 function A = updateA(R, U, k, lambda)
