@@ -8,6 +8,7 @@ function [Ytest_weak, Ytrain_new, Gtrain_new, Ytest_strong,Gstrong, dd,nn] = spl
 clear all;
 load songTrain;
 
+%% 10-fold cross validation
 % Test data for Strong generalization
 % keep 10% of users for testing as 'new users'
 % You should decide on your own how many new users you want to test on
@@ -17,6 +18,8 @@ idx = randperm(nbr_users);
 nTe = floor(nbr_users*0.1); 
 idxTe = idx(1:nTe);
 idxTr = idx(nTe+1:end);
+
+
 Ytrain_new = Ytrain(idxTr,:);
 Ytest_strong = Ytrain(idxTe,:);
 Gtrain_new = Gtrain(idxTr, idxTr);
@@ -27,19 +30,21 @@ Gstrong = Gtrain(idxTe, [idxTr idxTe]);
 [D, nbr_artists] = size(Ytrain_new);
 numD = 10; % number of artists held out per user
 dd = [];
-nn = [];
+nn = []; 
 yy = [];
 for n = 1:nbr_artists
     % for every artist, find the users that listened to the artist
     On = find(Ytrain_new(:,n)~=0);
-    if length(On)>2  % if there are more than 2 users
-        % get 10 random of them
-        ind = unidrnd(length(On),numD,1); % choose some for testing
+    n_users = length(On);
+    if n_users > 2  % if there are more than 2 users
+        % get at most 10 random of 
+        newD = min(n_users - 1, numD);
+        ind = unidrnd(length(On),newD,1); % choose some for testing
         d = On(ind);
         % keep indices of held out user ratings
         dd = [dd; d];
         % keep corresponding artist index
-        nn = [nn; n*ones(numD,1)];
+        nn = [nn; n*ones(newD,1)];
         % keep corresponding count
         yy = [yy; Ytrain_new(d,n)];
     end
@@ -47,4 +52,11 @@ end
 Ytest_weak = sparse(dd,nn,yy, D, nbr_artists);
 % 0 out the elements that are kept as weak data
 Ytrain_new(sub2ind([D nbr_artists], dd, nn)) = 0;
+
+
+fprintf('# of Original training data pairs %d\n', nnz(Ytrain));
+fprintf('# of new training data pairs %d\n', nnz(Ytrain_new));
+fprintf('# of weak testing data pairs %d\n', nnz(Ytest_weak));
+fprintf('# of strong testing data pairs %d\n', nnz(Ytest_strong));
+
 
