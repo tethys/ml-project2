@@ -1,4 +1,4 @@
-function [clusters, train_error] = KMeans_train(Ytrain, C, maxIters)
+function [clusters,cluster_assignment, train_error] = KMeans_train(Ytrain, C, maxIters)
 
 nbr_users = size(Ytrain,1);
 nbr_artists = size(Ytrain,2);
@@ -17,7 +17,11 @@ for u=1:nbr_users
         end
     end
 end
-clusters = Ytrain(1:C, :);
+[S, ~] = max(Ytrain,[],2);
+[~, J] = max(S);
+% max(Ytrain(:))
+% max(Ytrain(J,:))
+clusters = Ytrain([1:C-1 J], :);
 
 cluster_assignment = zeros(nbr_users,1);
 for i=1:maxIters
@@ -33,22 +37,26 @@ for i=1:maxIters
         c_indices = cluster_assignment==c;
         clusters(c,:) = sum(Ytrain(c_indices,:),1)/(sum(c_indices) + eps);
     end
-    hist(cluster_assignment)
-    pause
-    close
+    train_error = computeRMSE_error(Ytrain_initial, clusters, cluster_assignment);
+    %% compute train error;
+    fprintf('train error %f\n', train_error);
+%     hist(cluster_assignment)
+%     pause
+%     close
 end
 train_error = computeRMSE_error(Ytrain_initial, clusters, cluster_assignment);
 %% compute train error;
-frptinf('train error %f\n', train_error);
+fprintf('train error %f\n', train_error);
 
 end
 
 function cost = computeRMSE_error(Ytrain_initial,clusters, cluster_assignment)
     nzindices = Ytrain_initial ~=0;
     cost = 0;
+    nbr_users = size(Ytrain_initial,1);
     for u =1:nbr_users
         cindex = cluster_assignment(u);
-        cost = cost + sum((clusters(cindex,nzindices(u,:)) - Ytrain_initial(u,nzindices(u,:))).^2);
+        cost = cost + sum(exp(clusters(cindex,nzindices(u,:)) - Ytrain_initial(u,nzindices(u,:))).^2);
     end
     cost = sqrt(cost/nnz(Ytrain_initial));
 end
