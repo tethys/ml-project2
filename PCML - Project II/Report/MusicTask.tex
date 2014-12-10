@@ -9,11 +9,19 @@ We are also given the friendship graph of the $1774$ users stored as an adjacenc
 \subsection{Exploratory Data Analysis}
 
 The listening counts matrix is very sparse with a density of only $0.0026\%$, corresponding to 
-$69617$ (user, artist, count) triples.
-The highest count is $352698$, the average listening count per user is  5.52 and the average listening count per artist is 5.46 but the variance is very high.
-A histogram of all the listening counts, shown in Fig\ref{fig:count_distribution} tells us that the listening counts follow a heavy tail distribution. The long tail contains a small number of popular items, the well-known
-artists, and the rest are located in the heavy tail.
-One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform[cite]. In our case, we can choose $\lambda=0$ since for us  y values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on RMSE of the (user,artist,count) triples in the long tail. 
+$69617$ (user, artist, count) triples. 1262 artists had 0 listening counts.
+The variance of the entries is very high, the highest count is $352698$ while the average listening count per user and per artist are 5.52 and 5.46 respectively.
+
+A histogram of all the listening counts, shown in Fig\ref{fig:count_distribution} tells us that the lknown entries follow a heavy tail distribution. The long tail contains a small number of popular items, the well-known artists, and the rest are located in the heavy tail.
+One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform[cite]\\
+\begin{table}[h]
+  \centering
+  \begin{tabular}{c  c }
+  $data(\lambda)$&= $log(data), \lambda = 0$ \\ 
+                            &= $\frac{data^\lambda - 1}{\lambda} ,\lambda \neq 0$ \\ 
+  \end{tabular}
+\end{table}
+. In our case, we can choose $\lambda=0$ because our values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on RMSE of the (user,artist,count) triples in the long tail. 
 
 \begin{figure}[h]
   \centering
@@ -25,7 +33,7 @@ One method to transform skewed data such that it becomes more gaussian distribut
     \includegraphics[width=\textwidth]{figures/histLogYtrain_crop.pdf}
     \caption{After data transformation}
   \end{subfigure}
-  \caption{Distribution of listening counts}
+  \caption{Distribution of all listening counts}
   \label{fig:count_distribution}
 \end{figure}
 
@@ -39,19 +47,22 @@ One method to transform skewed data such that it becomes more gaussian distribut
     \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
     \caption{}
   \end{subfigure}
-  \caption{Per user and per artist log of listenining count distribution}
+  \caption{Distribution per user (a) and per artist(b) log of listenining count distribution}
   \label{fig:user_artist_distribution}
 \end{figure}
-1262 artists had 0 listening counts.
 
  
 \subsection{Task 1}
-We used 10-fold cross validation.
-Splitting the data was  more difficult since we needed to make sure we do not
-remove completely the counts of an user. We randomly omit for every artists 10 entries.
-If an artist has less than 10 entries, nentries, then we remove nentries-1, to still have on element for testing.
+In all our experiments we used 10-fold cross validation.
+For the first task, we randomly omit 10 entries for every artist.
+Splitting the data was more difficult since we needed to make sure we do not
+remove all the entries for an artist. If an artist has $NA$ entries with $NA < 10$, then we keep $NA-1$ entries for testing,
+ to still have one element for training.
+We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
+The methods logALS and logKmeans transformed the training entries using log, but computed the RMSE undoing the transformation, by taking exp of the result.
+ 
 \subsection{Baseline}
-The mose basic prediction is to try the global average count prediction, the average count per user prediciton and average count
+There are three simple basic predictions one can try: the global average count, the average count per user and the average count
 per artist prediction. All of these methods give similar RMSE results: 3356, 3293 and 3496 respectively.
 We note that the final RMSE is composed of various values, small and large. In Fig we can see a ploto of the RMSE error terms in log format.
 
@@ -59,28 +70,43 @@ We note that the final RMSE is composed of various values, small and large. In F
 \subsubsection{ALS}
 
 \subsubsection{logALS}
-Using 20 clusters and $lambda in 0.01,0.1,0.5,1$ we obtain the following results using 10 fold cross validation.
+Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation .The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
 \begin{center}
   \begin{tabular}{ |l | c | c| }
     \hline
      lambda & RMSE train & RMSE test \\ \hline
-     0.01   & 5.0754e+09 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
-     0.1     &  3.3508e+03 ($\pm$ 851.5037)  & 1.58 ($\pm$ 0.0608) \\ \hline
-     0.5    & 3.3419e+03  ( $\pm$ 851.7858)   &13.93 ($\pm$ 0.8605)\\ \hline
-     1       & 3.3876e+03 ($\pm$ 842.7349)   &25.30($\pm$ 1.48)\\ \hline
-     1.5    & 3.4165e+03 ($\pm$ 837.1776) & 44.25($\pm$ 2.93) \\
+     0.01   & 5075 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
+     0.05  &  3355 ($\pm$  895)            &                1.14 ($\pm$  0.02)                   \\ \hline
+     0.1     & 3350 ($\pm$ 851.5037)  & 1.58 ($\pm$ 0.0608) \\ \hline
+     0.5    & 3341  ( $\pm$ 851.7858)   &13.93 ($\pm$ 0.8605)\\ \hline
+     1       & 3387 ($\pm$ 842.7349)   &25.30($\pm$ 1.48)\\ \hline
+     1.5    & 3416 ($\pm$ 837.1776) & 44.25($\pm$ 2.93) \\
     \hline
   \end{tabular}
-  	\label{table:feat_transform}
+  	\label{table:labda_choice}
     \captionof{table}{Estimated Train and Test RMSE for the two blob models.}
 \end{center}
-We can see that our algorithms seems to generalize better when we increase the value of
-the regualization parameter. This means since we have so little data we are heavily overfitting for small values of lambda, as the train error is very small and the test error is very high. We chose our lambda to be 0.5 for the next experiments.
+We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.1 for the next experiments.
+Our algorithm did a good job training  with a RMSE less than  3 but a bad job on unseen data with RMSE > 3000, meaning it is overfitting 
+the training data and incrasing the value of lambda, the regularization parameter did not help.
 
-We varied the number of features from 10,20,30,40,50,60 with lambda = 0.5 and the results
-did not improve, giving train and test RMSE of 14and 3588.
-We kept the number of features to 20.
 
+We notice that the test error across the 10 different splits of the cross validation has values from 2000 to up to 6000. This is an artifact of the high listening counts present in the long tail and the randomness of the split.
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+   \includegraphics[width=\textwidth]{figures/distributionRMSE.pdf}
+    \caption{}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
+    \caption{}
+  \end{subfigure}
+  \caption{Distribution per user (a) and per artist(b) log of listenining count distribution}
+  \label{fig:new_plot}
+\end{figure}
+
+We varied the number of features from 10,20,30,40,50,60 with $\lambda = 0.1$. Giving train and test RMSE of 14 and 3588. So we kept the number of features to 20.
 \subsubsection{Kmeans}
 Inspired by the friendship graph information, we tried Kmeans with
 varying values from 10 30 in steps of 5. We plot the mean train and test error using 10 fold cross validation in figure below.
