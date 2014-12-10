@@ -77,10 +77,10 @@ Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in
      lambda & RMSE train & RMSE test \\ \hline
      0.01   & 5075 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
      0.05  &  3355 ($\pm$  895)            &                1.14 ($\pm$  0.02)                   \\ \hline
-     0.1     & 3350 ($\pm$ 851.5037)  & 1.58 ($\pm$ 0.0608) \\ \hline
-     0.5    & 3341  ( $\pm$ 851.7858)   &13.93 ($\pm$ 0.8605)\\ \hline
-     1       & 3387 ($\pm$ 842.7349)   &25.30($\pm$ 1.48)\\ \hline
-     1.5    & 3416 ($\pm$ 837.1776) & 44.25($\pm$ 2.93) \\
+     0.1     & 3350 ($\pm$ 851)  & 1.58 ($\pm$ 0.06) \\ \hline
+     0.5    & 3341  ( $\pm$ 851)   &13.93 ($\pm$ 0.86)\\ \hline
+     1       & 3387 ($\pm$ 842)   &25.30($\pm$ 1.48)\\ \hline
+     1.5    & 3416 ($\pm$ 837) & 44.25($\pm$ 2.93) \\
     \hline
   \end{tabular}
   	\label{table:labda_choice}
@@ -106,10 +106,34 @@ We notice that the test error across the 10 different splits of the cross valida
   \label{fig:new_plot}
 \end{figure}
 
-We varied the number of features from 10,20,30,40,50,60 with $\lambda = 0.1$. Giving train and test RMSE of 14 and 3588. So we kept the number of features to 20.
-\subsubsection{Kmeans}
+We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.1$ and repeteated the experiments with different seed.
+ Giving train  between 1.24 increasing up to  2.4 for 19 features.  The test RMSE  
+ was always in the interval [3569,3546]. None of this results results proved meaningful.
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+   \includegraphics[width=\textwidth]{figures/als_train.pdf}
+    \caption{}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/als_test.pdf}
+    \caption{}
+  \end{subfigure}
+  \caption{Train and Test RMSE for logALS with varying number of features}
+  \label{fig:new_plot}
+\end{figure}
+
+\subsubsection{logKmeans}
+We implemented logKmeans clustering over users by first tranforming the data using log.
+The reason for implementing Kmeans with clustering of users 
+instead of artists, although the number of artists is 10 times larger than the number of users is to 
+use the clusters obtained here also in Task 2.
+
 Inspired by the friendship graph information, we tried Kmeans with
-varying values from 10 30 in steps of 5. We plot the mean train and test error using 10 fold cross validation in figure below.
+varying values from [[10,15,20,25,30,50,100]. We plot the mean train and test error using 10 fold cross validation in figure below. Unfortunately all seven setups performed similarly,
+giving up +/- 50 RMSE almost the same test error.
+The missing entries in the matrix were initialized with [] according to , although that did not have a huge impact on our results. We then sorted the users according to their average score and initialized the clusters with samples of sorted users to have a more equilibrated assignment of users to clusters. One sample results for 20 clusters is seen in Fig.
 
 We took log of the nonzeros entries of Ytrainnew and before 
 computing RMSE we tranformed the data back by taking the exp
@@ -117,14 +141,21 @@ of the predicted values.
 We noticed also the fact that sometimes the training error of Kmeans
 (reported using exp of data) had very small fluctuations and it was not always decreasig as the algorithm convergence properties would expect. This is due to the fact that Kmeans miminizes squared error but our cost is a little different since we transform the data using exp.
 
-We had avary large variations in the algorithm's output.
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+   \includegraphics[width=\textwidth]{figures/kmeans_train.pdf}
+    \caption{}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/kmeans_test.pdf}
+    \caption{}
+  \end{subfigure}
+  \caption{bla bla}
+  \label{fig:kmeans_final}
+\end{figure}
 
-One reason for performing Kmeans for clusteringover users 
-instead of over artists, although the number of artists is larger than the number of users is to be easier in Task 2.
 
-
-
-We can see that our algorithm performs for
 
 \subsection{Task 2}
 \subsubsection{Friendship information}
