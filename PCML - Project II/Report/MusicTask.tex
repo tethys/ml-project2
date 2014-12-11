@@ -131,7 +131,7 @@ instead of artists, although the number of artists is 10 times larger than the n
 use the clusters obtained here also in Task 2.
 
 Inspired by the friendship graph information, we tried Kmeans with
-varying values from [[10,15,20,25,30,50,100]. We plot the mean train and test error using 10 fold cross validation in figure below. Unfortunately all seven setups performed similarly,
+varying values from [10,15,20,25,30,50,100]. We plot the mean train and test error using 10 fold cross validation in figure below. Unfortunately all seven setups performed similarly,
 giving up +/- 50 RMSE almost the same test error.
 The missing entries in the matrix were initialized with [] according to , although that did not have a huge impact on our results. We then sorted the users according to their average score and initialized the clusters with samples of sorted users to have a more equilibrated assignment of users to clusters. One sample results for 20 clusters is seen in Fig.
 
@@ -159,25 +159,45 @@ We noticed also the fact that sometimes the training error of Kmeans
 
 \subsection{Task 2}
 \subsubsection{Friendship information}
-Regarding the friendshiop information, we noticed there are 22 connected components, but many of them contained.
-1776 nodes and 22904 edges.
-Using Vincent D Blondel, Jean-Loup Guillaume, Renaud Lambiotte, Etienne Lefebvre, Fast unfolding of communities in large networks, in Journal of Statistical Mechanics: Theory and Experiment 2008 (10), P1000 and the Gephi tool to find properties of the graph, it suggested it has about
-32 communities, of which 8 had more than 150 members and the others being very small. (22 connected components, of which 20 are very small < 50 users.) This was run to give us an idea of the number of clusters we could use in Kmeans.
+The initial friendship graph Gtrain of 1776 nodes and 22904 edges contained 22 connected components, but the majority of the components contained just a few nodes.
+Using the Gephi tool[cite] we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
+These statistics were run so that we get an idea of the number of user clusters present if friendship information is used. The number of connected components and of communities are similar with our choice of LogKMeans of 20-30 clusters.
 
-\subsection{•}
-In this task we are given a set of new users and their friendship information.
-The task is to predict their listening counts based only on their friendship information with
-people for which we already have some information about their listening habbits.
-We experiment with three methods.
- A baseline method in which a (user,artist) count is predicted
-using the average count of its friends, global average if that informatino id not present.
+In this task we are given a set of new users and their friendship information with a set of users
+for which some listening counts are available. The challenge is to predict the listening counts for the new users based on the information given. In other words, we try to see if there is a correlation between
+users' friendship and users' preference in music.
+
+We have tried two approaches, one based on the mean average per user and one based on kmeans clustering per user.
+
+\subsubsection{User Mean Average}
+In this baseline method, a missing element of $Ytrain\_new(u,a)$ is initialized with the mean count
+of user u. 
+
+An entry of a new user $Ystrong(u,a)$ is computed as the average count of its friends $(f,a)$ or global average count if that information is not present.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ c  l }
+  $Ystrong(u,a) $&= $\frac{\sum_{f\in Friends(u), Ytrain(f,a)\neq0}{Ytrain(f,a)}}{n\_fa}, n\_fa \neq 0$ \\ 
+                          &= $global\_average, n\_fa = 0$ \\ 
+  \end{tabular}
+\end{table}
+where $n\_fa$ is the cardinality of the set $\left\{ Ytrain(f,a)\neq0, f\in Friends(u)\right\}$
+This gave us an RMSE of 4137  and std of 1164, which is the same RMSE as if we were using global average for all the entries.
+
+In a second variation of this, the average is done over the friends of user u and friends of the friends of user u.
+This gives us an RMSE of  4084 with std of 1178. If we increase the number of friends we obtain a similar result 4083.
+\subsubsection{KMeans}
 
 The second method uses the 20 clusters from the previous method and predicts the count
 as an average weight of the listening counts of the clusters of the friends.
 
 The thirs method uses the 20 clusters from the previous method in a weighted average approach but this time also the friends of the friends information is used. 
 
+
 \subsection{Summary}
 
+Using Vincent D Blondel, Jean-Loup Guillaume, Renaud Lambiotte, Etienne Lefebvre, Fast unfolding of communities in large networks, in Journal of Statistical Mechanics: Theory and Experiment 2008 (10), P1000 and the Gephi tool to find properties of the graph, it suggested it has about
+32 communities, of which 8 had more than 150 members and the others being very small. (22 connected components, of which 20 are very small < 50 users.) This was run to give us an idea of the number of clusters we could use in Kmeans.
 
 
