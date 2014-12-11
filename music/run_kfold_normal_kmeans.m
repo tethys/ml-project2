@@ -31,9 +31,11 @@ for k_index = 1:NC
             test_error = MAE(Ypredicted, Ytest_weak);
             meanTrainMAE(k_index, i, kfold_iter) = train_error;
             meanTestMAE(k_index, i, kfold_iter) = test_error;
-           fprintf('iterations %f %f\n', test_error, train_error)
+            fprintf('iterations %f %f\n', test_error, train_error)
+           
+            save('train_test_rmse_kmeans_blabla.mat','meanTrainMAE', 'meanTestMAE')
         end
     end
 end
-
-save('train_test_rmse_kmeans_blabla.mat','meanTrainRMSE', 'meanTestRMSE')
+fprintf('finish\n');
+save('train_test_mae_normal_kmeans.mat','meanTrainMAE', 'meanTestMAE')
