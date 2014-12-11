@@ -9,10 +9,7 @@ function [U, A, Eold] = RecomExponentialALS(R, k, lambda, maxIters)
 [n, m] = size(R);
  rng('default')
  U = randn(n,k);
- indices = R(:,1)~=0;
- value = mean(R(indices,1));
  A = randn(k,m);
- A(:,1) = value;
 
 % Initialize algorithm parametes
   s = 1;
@@ -41,8 +38,8 @@ end
 function cost = calcCost(R, U, A)
    pp = U*A;
    nz_indices = find(R ~= 0);
-   cost = sum((exp(R(nz_indices) - pp(nz_indices))).^2);
-   cost = sqrt(cost / size(nz_indices,1));
+   cost = sum((abs(R(nz_indices) - pp(nz_indices))));
+   cost = cost / nnz(R);
 end
 
 function A = updateA(R, U, k, lambda)
