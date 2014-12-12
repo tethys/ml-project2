@@ -5,6 +5,13 @@ fprintf('number of artists %d\n', size(Ytrain,2));
 fprintf('number of users %d\n', size(Ytrain,1));
 fprintf('number of training entries %d\n', nnz(Ytrain));
 
+
+sum_per_artist = sum(Ytrain,1);
+indices = (Ytrain~=0);
+sum_one_per_artist = sum(indices,1);
+mean_artist = sum_per_artists./sum_one_per_artist;
+plot(mean_artist)
+
 % plot number of counts per artist and per user
 figure(1);
 subplot(211);

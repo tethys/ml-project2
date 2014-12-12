@@ -1,12 +1,12 @@
 
 clear all;
 load songTrain;
-nbr_features = [20];
-nlambda = [0.01, 0.05, 0.1, 0.5,1,1.5];
+nbr_features = [20,20,30,40,50,100];
+nlambda = [0.05];
 nbr_iterations = 1;
 K = 10;
-NF = 1;
-NL = 6;
+NF = 6;
+NL = 1;
 meanTrainMAE = zeros(NF, NL,nbr_iterations,K);
 meanTestMAE = zeros(NF, NL, nbr_iterations,K);
 
@@ -32,11 +32,11 @@ for f_index = 1:NF
             meanTrainMAE(f_index, l_index, i, kfold_iter) = train_error;
             meanTestMAE(f_index, l_index, i, kfold_iter) = test_error;
             fprintf('iterations %f %f\n', test_error, train_error)
-            save('train_test_rmse_logALS_6lambdas.mat','meanTrainMAE', 'meanTestMAE')
+            save('train_test_rmse_logALS_6features.mat','meanTrainMAE', 'meanTestMAE')
 
         end
     end
   end
 end
 fprintf('finish\n')
-save('train_test_mae_logALS_6lambdas.mat','meanTrainMAE', 'meanTestMAE')
+save('train_test_mae_logALS_6features.mat','meanTrainMAE', 'meanTestMAE')
