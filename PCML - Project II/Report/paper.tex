@@ -41,11 +41,9 @@
 This report presents experimental results and performance comparison of common machine 
 learning methods on two different tasks. The first task is a computer vision problem, a people detection task.
 We implemented classifiers that are able to predict to a certain degree if an image contains a standing person or not.
-The performance was measured using ROC curves. The second task is a music recommender systems challenge. 
-For this problem, we need to predict how many times an user will listen to a certain artist, based on the listening history of this user and the other users. The other subtask of this challenge is to
-predict the listening counts of new users, for which we do not have music preference information.
-For this, we are given the friendship information with other users for which we already know the listening counts.
-The performance of the various method was measured using RMSE.
+The performance was measured using ROC curves. The second task is a music recommendation challenge. 
+For this problem, we need to predict how many times an old or a completely new user will listen to a certain artist, based on the available listening history of the users and their friendship information.
+The performance of the various methods was measured using the mean average error of the transformed data.
 \end{abstract}
 
 \section{Music Recommendation}

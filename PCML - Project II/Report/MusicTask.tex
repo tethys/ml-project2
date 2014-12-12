@@ -1,19 +1,20 @@
 \subsection{Music recommendation}
-Collaborative filtering is the part of recommender systems that predicts users' preferences for particular items. The major challenge in predicting users'listening count, as in our task, is that the available user-artist counts are usually too few and sometimes a method's performance relies on a good initial estimation of the unknown entries. 
-These are reasons why we decided to implement besides the common Kmeans, KNN also ALS[cite here], which uses only the known listening counts and avoids dependency on initial estimations.
+Collaborative filtering is the part of recommender systems that predicts users' preferences for particular items. The major challenge in predicting users'listening counts, as in our task, is that the available user-artist entries are usually too few and sometimes a method's performance relies on a good initial estimation of the unknown entries. 
+We therefor decided to implement besides the common KNN, Kmeans also ALS[cite here], which uses only the known listening counts and avoids dependency on initial estimations.
 
 \subsection{Data description}
-The training data consists in a matrix $Ytrain$ of size $1774x15082$, corresponding to $1774$ users and $15802$ artists. Element $Ytrain(i,j)$ expresses how many times user i has listened to artist j. An entry of 0 means we do not have information for that (user, artist, count) triple.
+The training data consists in a matrix $Ytrain$ of size $1774$x$15082$, corresponding to $1774$ users and $15802$ artists. Entry $Ytrain(i,j)$ expresses how many times user $i$ has listened to artist $j$. An entry of 0 means we do not have information for that $(user, artist, count)$ triple.
 We are also given the friendship graph of the $1774$ users stored as an adjacency matrix.
 
 \subsection{Exploratory Data Analysis}
 
-The listening counts matrix is very sparse with a density of only $0.0026\%$, corresponding to 
-$69617$ (user, artist, count) triples. 1262 artists had 0 listening counts.
-The variance of the entries is very high, the highest count is $352698$ while the average listening count per user and per artist are 5.52 and 5.46 respectively.
+The matrix $Ytrain$ is very sparse with a density of only $0.0026\%$, corresponding to 
+$69617 (user, artist, count)$ triples. 
+The variance of the entries' values is very high, the maximum  being $352698$ and average listening count per user and per artist of 5.52 and 5.46 respectively. There were also 1262 artists for which no information was provided.
 
-A histogram of all the listening counts, shown in Fig\ref{fig:count_distribution} tells us that the lknown entries follow a heavy tail distribution. The long tail contains a small number of popular items, the well-known artists, and the rest are located in the heavy tail.
-One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform[cite]\\
+A histogram of all the listening counts, shown in Fig\ref{fig:count_distribution} $a)$ tells us that the known entries follow a heavy tail distribution. The long tail contains a small number of popular items, the well-known artists, and the rest are located in the heavy tail.
+One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform
+\\
 \begin{table}[h]
   \centering
   \begin{tabular}{c  c }
@@ -21,7 +22,10 @@ One method to transform skewed data such that it becomes more gaussian distribut
                             &= $\frac{data^\lambda - 1}{\lambda} ,\lambda \neq 0$ \\ 
   \end{tabular}
 \end{table}
-. In our case, we can choose $\lambda=0$ because our values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on RMSE of the (user,artist,count) triples in the long tail. 
+
+In our case, we can choose $\lambda=0$ because our values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on error of the (user,artist,count) triples in the long tail. 
+
+The results after data transformation can be seen in Fig \ref{fig:user_artist_distribution}. The distribution of the user counts and of the artist counts are closer to a normal distribution. We notice there are some far away entries with values greater than 14. These will have a higher impact on the untransformed data. An off by 1 error here will have more impact than on the small entries.
 
 \begin{figure}[h]
   \centering
@@ -47,29 +51,32 @@ One method to transform skewed data such that it becomes more gaussian distribut
     \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
     \caption{}
   \end{subfigure}
-  \caption{Distribution per user (a) and per artist(b) log of listenining count distribution}
+  \caption{Distribution per user (a) and per artist (b) log of listening count distribution}
   \label{fig:user_artist_distribution}
 \end{figure}
 
  
 \subsection{Task 1}
-In all our experiments we used 10-fold cross validation.
+In all our experiments we used 10-fold cross validation and repeated the experiments twice.
 For the first task, we randomly omit 10 entries for every artist.
 Splitting the data was more difficult since we needed to make sure we do not
-remove all the entries for an artist. If an artist has $NA$ entries with $NA < 10$, then we keep $NA-1$ entries for testing,
+remove all the entries for an artist. If an artist has $m$ entries with $m < 10$, then we keep $m-1$ entries for testing,
  to still have one element for training.
-We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
-The methods logALS and logKmeans transformed the training entries using log, but computed the RMSE undoing the transformation, by taking exp of the result.
+ 
  
 \subsection{Baseline}
 There are three simple basic predictions one can try: the global average count, the average count per user and the average count
-per artist prediction. All of these methods give similar RMSE results: 3356, 3293 and 3496 respectively.
-We note that the final RMSE is composed of various values, small and large. In Fig we can see a ploto of the RMSE error terms in log format.
+per artist prediction. All of these methods give similar MAE results: 3356, 3293 and 3496 respectively.
+We note that the final MAE is composed of various values, small and large. In Fig we can see a ploto of the MAE error terms in log format.
 
 \subsubsection{KNN}
-\subsubsection{ALS}
+\textcolor{red}{TODO}
 
-\subsubsection{logALS}
+
+\subsubsection{ALS}
+We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
+\textcolor{red}{TODO}
+
 Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation .The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
 \begin{center}
   \begin{tabular}{ |l | c | c| }
@@ -124,56 +131,56 @@ We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.1$ an
   \label{fig:new_plot}
 \end{figure}
 
-\subsubsection{logKmeans}
-We implemented logKmeans clustering over users by first tranforming the data using log.
-The reason for implementing Kmeans with clustering of users 
-instead of artists, although the number of artists is 10 times larger than the number of users is to 
-use the clusters obtained here also in Task 2.
+\subsubsection{Kmeans}
+Although the number of artists is 10 times larger than the number of users,
+we chose to implement Kmeans with clustering of users 
+instead of artists so that we can use the clusters obtained here also in Task 2.
+
+The missing entries in the matrix were initialized with the user average, although that did not have a huge impact on our results. We then sorted the users according to their average score and initialized the clusters with equally spaced samples from the sorted users array. The goal of this cluster initialization was to have a more equilibrated assignment of users to clusters and to make sure we have clusters from both highly active users and also from the less active.
 
 Inspired by the friendship graph information, we tried Kmeans with
-varying values from [10,15,20,25,30,50,100]. We plot the mean train and test error using 10 fold cross validation in figure below. Unfortunately all seven setups performed similarly,
-giving up +/- 50 RMSE almost the same test error.
-The missing entries in the matrix were initialized with [] according to , although that did not have a huge impact on our results. We then sorted the users according to their average score and initialized the clusters with samples of sorted users to have a more equilibrated assignment of users to clusters. One sample results for 20 clusters is seen in Fig.
+varying values from [3,10,20,30,40,50,100]. We plot the mean train and test error using 10 fold cross validation in Fig \ref{fig:kmeans_final}. Using only 3 clusters both the train and the test error was high, while for 100 clusters the difference between train and test error became larger, giving signs of overfitting.
 
-We took log of the nonzeros entries of Ytrainnew and before 
-computing RMSE we tranformed the data back by taking the exp
-of the predicted values.
 We noticed also the fact that sometimes the training error of Kmeans
-(reported using exp of data) had very small fluctuations and it was not always decreasig as the algorithm convergence properties would expect. This is due to the fact that Kmeans miminizes squared error but our cost is a little different since we transform the data using exp.
+(reported by taking exp of data and RMSE) had small fluctuations and it was not always decreasig as the algorithm convergence properties would expect. This is due to the fact that Kmeans miminizes squared error but our cost is a little different since we transform the data using exp.
 
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
-   \includegraphics[width=\textwidth]{figures/kmeans_train.pdf}
+   \includegraphics[width=\textwidth]{figures/kmeans_train_test.pdf}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{figures/kmeans_test.pdf}
+    \includegraphics[width=\textwidth]{figures/kmeans_train_test.pdf}
     \caption{}
   \end{subfigure}
   \caption{bla bla}
   \label{fig:kmeans_final}
 \end{figure}
 
+In all the experiments with more than 20 clusters obtained a test MAE close to 0.64,.
+This was our best test MAE so far. 
+For computational reasons, we picked 20 clusters for the next task.
 
+We also tried KMeans where in the update step, only the entries for artists that were known were updated. We expected this to perform better, but the algorithm had problems with overfitting, always giving a train error less than 0.4 (much less than the normal Kmeans) but a test error a bit over 0.7 (higher than the normal KMeans). This happened for all the cluster sizes we experimented with.
 
 \subsection{Task 2}
 \subsubsection{Friendship information}
-The initial friendship graph Gtrain of 1776 nodes and 22904 edges contained 22 connected components, but the majority of the components contained just a few nodes.
-Using the Gephi tool[cite] we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
-These statistics were run so that we get an idea of the number of user clusters present if friendship information is used. The number of connected components and of communities are similar with our choice of LogKMeans of 20-30 clusters.
+The initial friendship graph $Gtrain$ of $1776$ nodes and $22904 edges$ contained $22$ connected components, but the majority of the components contained just a few nodes.
+Using the Gephi  \footnote{http://gephi.github.io/} tool we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
+These statistics were run so that we get an idea of the number of friendship clusters present. The number of connected components and of communities are similar with our choice of 20-30 clusters in KMeans .
 
 In this task we are given a set of new users and their friendship information with a set of users
 for which some listening counts are available. The challenge is to predict the listening counts for the new users based on the information given. In other words, we try to see if there is a correlation between
 users' friendship and users' preference in music.
 
-We have tried two approaches, one based on the mean average per user and one based on kmeans clustering per user.
+We have tried two approaches using the friendship information, one based on the mean average per user and one based on kmeans clustering per user.
 
-\subsubsection{User Mean Average}
-In this baseline method, a missing element of $Ytrain\_new(u,a)$ is initialized with the mean count
-of user u. 
+\subsubsection{Baseline Methods}
+As a baseline method, we predict for a missing value in the new users set the global average of all the available counts, which gave us a MAE of 1.07 8($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
 
-An entry of a new user $Ystrong(u,a)$ is computed as the average count of its friends $(f,a)$ or global average count if that information is not present.
+\subsection{Using Friendship information}
+In the first approach, an entry of a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $(f,a)$ for that artist or global average count for an user without friends (sad).
 
 \begin{table}[h]
   \centering
@@ -183,21 +190,18 @@ An entry of a new user $Ystrong(u,a)$ is computed as the average count of its fr
   \end{tabular}
 \end{table}
 where $n\_fa$ is the cardinality of the set $\left\{ Ytrain(f,a)\neq0, f\in Friends(u)\right\}$
-This gave us an RMSE of 4137  and std of 1164, which is the same RMSE as if we were using global average for all the entries.
 
-In a second variation of this, the average is done over the friends of user u and friends of the friends of user u.
-This gives us an RMSE of  4084 with std of 1178. If we increase the number of friends we obtain a similar result 4083.
+For this setup  we obtain  1.52 and 0.2911 which is smaller than our global average baseline.
+If we also take into account the friends of the friends of user u we obtain  a MAE of 1.08($\pm$ 0.041). This result is comparable with the global average result.
+
 \subsubsection{KMeans}
+We cluster the users into 20 groups using the KMeans setup from Task 1
+and repeat the experiments. For a new user, we predict the rating as the weighted mean of its friends' cluster. This gave us a MAE of
+1.08 , 0.04.
+Another try where the mean was done over the unique clusters or using only the most common cluster, gave us MAE of 1.49.
+Another try with 100 friends 1.55.
 
-The second method uses the 20 clusters from the previous method and predicts the count
-as an average weight of the listening counts of the clusters of the friends.
-
-The thirs method uses the 20 clusters from the previous method in a weighted average approach but this time also the friends of the friends information is used. 
-
+Although KMeans with 20 features behaves similar with the baseline global average, we decided to use this on our newly predicted data.
 
 \subsection{Summary}
-
-Using Vincent D Blondel, Jean-Loup Guillaume, Renaud Lambiotte, Etienne Lefebvre, Fast unfolding of communities in large networks, in Journal of Statistical Mechanics: Theory and Experiment 2008 (10), P1000 and the Gephi tool to find properties of the graph, it suggested it has about
-32 communities, of which 8 had more than 150 members and the others being very small. (22 connected components, of which 20 are very small < 50 users.) This was run to give us an idea of the number of clusters we could use in Kmeans.
-
-
+Skwes the results, it is more important to have correct predictions on the users with hight counts. Looking back, we could have kep track of the max and median value of the test error to asses the accuracy of our results.
