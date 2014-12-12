@@ -1,10 +1,10 @@
 
 clear all;
 load songTrain;
-nbr_clusters = [3,10,20,30,40,50,100];
+nbr_clusters = [20,30,40,50,100];
 nbr_iterations = 2;
 K = 10;
-NC = 7;
+NC = 5;
 meanTrainMAE = zeros(NC,nbr_iterations,K);
 meanTestMAE = zeros(NC, nbr_iterations,K);
 
@@ -20,7 +20,9 @@ for k_index = 1:NC
             maxIters = 5;
             
             Ytrain_new(Ytrain_new~=0) = log(Ytrain_new(Ytrain_new~=0));
-            [clusters, cluster_assignment, train_error] = KMeansNormal_train(full(Ytrain_new), ...
+
+            
+            [clusters, cluster_assignment, train_error] = KMeans_complex_train(full(Ytrain_new), ...
                                            nbr_clusters(k_index), ...
                                            maxIters);
             Ypredicted = zeros(size(Ytrain_new));
@@ -33,9 +35,9 @@ for k_index = 1:NC
             meanTestMAE(k_index, i, kfold_iter) = test_error;
             fprintf('iterations %f %f\n', test_error, train_error)
            
-            save('train_test_rmse_kmeans_blabla.mat','meanTrainMAE', 'meanTestMAE')
+            save('train_test_rmse_kmeans_complex_run.mat','meanTrainMAE', 'meanTestMAE')
         end
     end
 end
 fprintf('finish\n');
-save('train_test_mae_normal_kmeans.mat','meanTrainMAE', 'meanTestMAE')
+save('train_test_mae_normal_kmeans_complex_run.mat','meanTrainMAE', 'meanTestMAE')
