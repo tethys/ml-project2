@@ -22,14 +22,16 @@ for i = 1:nbr_iterations
         maxIters = 5;
             
         Ytrain_new(Ytrain_new~=0) = log(Ytrain_new(Ytrain_new~=0));
-        [clusters, cluster_assignment, train_error] = KMeansNormal_train(full(Ytrain_new), ...
+        [clusters, cluster_assignment, train_error] = KMeans_complex_train(full(Ytrain_new), ...
                                            20, ...
                                            maxIters);
         Ypredicted = zeros(size(Ytest_strong));
         for u =1:nbr_new_users
           %  u
            u_friends_indices = full(Gstrong(u,1:1597)) == 1;
-           allf = [u_friends_indices];
+           u_friends_friends_indices = full(Gtrain_new(u_friends_indices,1:1597)) == 1;
+
+           allf = [u_friends_indices; u_friends_friends_indices];
           if (sum(u_friends_indices(:))==0)
                %% gives 1:177 size again
               u_gfriends_indices = full(Gstrong(u,1598:end)) == 1;
@@ -46,9 +48,9 @@ for i = 1:nbr_iterations
           
           cluster_indices = cluster_assignment(boolean(allf));
          % cluster_indices = unique(cluster_indices);
-          cluster_indices = unique(cluster_indices);
-          %Ypredicted(u,:) = mean(clusters(cluster_indices,:));
+         % cluster_indices = mode(cluster_indices);
           Ypredicted(u,:) = mean(clusters(cluster_indices,:));
+          %Ypredicted(u,:) = mean(clusters(cluster_indices,:));
         end
         
         nindices = Ytest_strong~=0;
@@ -58,5 +60,4 @@ for i = 1:nbr_iterations
        fprintf('iterations %f \n', test_error)
     end
 end
-
-save('train_test_mae_strong_kmeans20_friends.mat', 'meanTestMAE')
+save('train_test_mae_strong_20kmeans_complex_friends.mat', 'meanTestMAE')
