@@ -1,9 +1,9 @@
-\subsection{Data description and visualization}
-The original training data $imgs$ contains 8545 color images with size 105x43. From every image a HOG descriptor with size 26x10x36 was extracted. All of these descriptors are saved at $feats$ and form the training data that we will work on. To process this HOG features we have converted them into a vector of total length 9360.
+\subsection{Data description}
+The training data $imgs$ contains 8545 color images of size 105x43. From every image a HOG descriptor 26x10x36 was extracted and converted into a vector of total length 9360. All of these descriptors form the training data that we will work on. 
 
-\noindent We notice that there are 7308 images without presence of people (negative images) and 1237 with (positive images). Figure \ref{fig:starting_images} presents a typical example from each category accompanied with the relevant feature descriptor.
+\noindent We notice that there are 7308 images without presence of people (negative images) and 1237 with (positive images). Fig\ref{fig:starting_images} presents a typical example from each category along with the corresponding feature descriptor.
 
-\noindent Our task is to train various classifiers, so that we will be able to detect the presence of people in unknown cases. For these purpose we evaluate these classifiers, measuring the accuracy of their estimations using Receiver Operating Characteristics (ROC) curves.
+\noindent Our task is to train various classifiers, so that we will be able to detect the presence of people in new images. For this purpose we evaluate five classifiers, measuring the accuracy of their estimations using Receiver Operating Characteristics (ROC) curves.
 
 \begin{figure}[h]
   \centering
@@ -15,19 +15,22 @@ The original training data $imgs$ contains 8545 color images with size 105x43. F
     \includegraphics[width=\textwidth]{figures/negative_image.pdf}
     \caption{Negative image.}
   \end{subfigure}
-  \caption{Examples of positive and negative images accompanied with their feature descriptors.}
+  \caption{Examples of positive and negative images and their corresponding feature descriptors.}
   \label{fig:starting_images}
 \end{figure}
 
-\subsection{Data preprocessing and used methods}
-\noindent Working on the extracted features, we split the data in order to perform our experiments. In our case we used K-fold validation with K = 5 to evaluate the performance of each classifier. Next step is to normalize the data so they will be centered with 0 mean and standard deviation 1. Here, we have to mention that we assume that there are no outliers, since the images are manually annotated and they have only two possible values for the classes.
+\subsection{Data preprocessing}
+\noindent We assume that there are no outliers, since the images are manually annotated. We work on the extracted features so we normalize the 9360 dim vectors to have  0 mean and standard deviation 1.
 
-\noindent The methods that were tested throughout this experiment are the naive Bayes classifier, the logistic regression and its penalized version, the Support Vector Machine (SVM), the K-NN classifier, and the Neural Network classifiers. All of them are compared also with the random guess of the class in the last subsection of this task.
+For all the methods presented below we used 5 fold cross validation.
 
-\noindent Moreover, we have to say that at the beginning of the experiments we developed and tried PC Analysis, but, except the huge computational time that was necessary to perform it, it did not give almost any improvements to the dimensionality of our data.
+\noindent The methods that we compare are the naive Bayes classifier, the logistic and penalized logistic regresion, the Support Vector Machine (SVM), the K-NN classifier, and the Neural Network classifiers. All of them are compared also with the random guess of the class in a later subsection of the report.
+
+\noindent We note that before the experiments we tried using PCA for reducing the dimensionality of the feature descriptors. The reduction in dimensionality was minimal but at a huge computational cost so we decided to drop it.
+\textcolor{red}{TODO ask vasilis what was the reduction}
 
 \subsection{Naive Bayes classifier}
-\noindent In this part we tried to fit a simple Bayes classifier to our data. The assumptions that we made were that we have data that follow the normal distribution and the estimates of the prior probabilities are empirical and were made from the relative frequencies of the classes in training.
+\noindent In this part we tried to fit a simple Bayes classifier to our data. For this, we made the assumption that the data is normally distributed and the estimates of the prior probabilities can be estimated empirically from the relative frequencies of the classes in training.
 
 \noindent The results from the K-fold validation were not very satisfying, since the average TPR was very low (0.031). The reason that may be hidden behind that are the strong assumptions that we made in order to fit this model. Naive Bayes model assumes that the data that will process every time follow a specific distribution (in our case Gaussian), but also that the value of a particular feature is unrelated to the presence or absence of any other feature, given the variable of the class. In our case, this is possibly wrong, so the classifier cannot fit a appropriate model.
 

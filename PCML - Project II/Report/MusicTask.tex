@@ -66,7 +66,7 @@ remove all the entries for an artist. If an artist has $m$ entries with $m < 10$
  
 \subsection{Baseline}
 There are three simple basic predictions one can try: the global average count, the average count per user and the average count
-per artist prediction. All of these methods give similar MAE results: 3356, 3293 and 3496 respectively.
+per artist prediction. All of these methods give similar MAE results:  1.1117($pm$ 0.0079), 0.64($pm$ 0.0042) and   1.2134($pm$ 0.0092).
 We note that the final MAE is composed of various values, small and large. In Fig we can see a ploto of the MAE error terms in log format.
 
 \subsubsection{KNN}
@@ -165,22 +165,22 @@ For computational reasons, we picked 20 clusters for the next task.
 We also tried KMeans where in the update step, only the entries for artists that were known were updated. We expected this to perform better, but the algorithm had problems with overfitting, always giving a train error less than 0.4 (much less than the normal Kmeans) but a test error a bit over 0.7 (higher than the normal KMeans). This happened for all the cluster sizes we experimented with.
 
 \subsection{Task 2}
+In this task we make predictions for a set of new users using their friendship information with a set of old users for which partial listening history is available. In other words, we try to see if there is a correlation between
+users' friendship and users' preference in music.
+
 \subsubsection{Friendship information}
-The initial friendship graph $Gtrain$ of $1776$ nodes and $22904 edges$ contained $22$ connected components, but the majority of the components contained just a few nodes.
+The initial friendship graph $Gtrain$ of $1776$ nodes and $22904$ edges contained $22$ connected components, but the majority of the components contained just a few nodes.
 Using the Gephi  \footnote{http://gephi.github.io/} tool we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
 These statistics were run so that we get an idea of the number of friendship clusters present. The number of connected components and of communities are similar with our choice of 20-30 clusters in KMeans .
 
-In this task we are given a set of new users and their friendship information with a set of users
-for which some listening counts are available. The challenge is to predict the listening counts for the new users based on the information given. In other words, we try to see if there is a correlation between
-users' friendship and users' preference in music.
-
-We have tried two approaches using the friendship information, one based on the mean average per user and one based on kmeans clustering per user.
+We have tried two approaches using the friendship information, one based on the mean average per user and one based on kmeans clustering of users.
 
 \subsubsection{Baseline Methods}
-As a baseline method, we predict for a missing value in the new users set the global average of all the available counts, which gave us a MAE of 1.07 8($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
+As a reference method, we predict for a missing value the global average of all the available counts, which gave us a MAE of 1.078($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
 
-\subsection{Using Friendship information}
-In the first approach, an entry of a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $(f,a)$ for that artist or global average count for an user without friends (sad).
+\subsection{Average Friend Method}
+We sum up this approach as "You are the average of your friends".
+In mathematical terms, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends (sad).
 
 \begin{table}[h]
   \centering
@@ -191,17 +191,16 @@ In the first approach, an entry of a new user $Ystrong(u,a)$ is computed as the 
 \end{table}
 where $n\_fa$ is the cardinality of the set $\left\{ Ytrain(f,a)\neq0, f\in Friends(u)\right\}$
 
-For this setup  we obtain  1.52 and 0.2911 which is smaller than our global average baseline.
+For this setup  we obtain  1.52 ($pm$0.291) which is smaller than our global average baseline prediction.
 If we also take into account the friends of the friends of user u we obtain  a MAE of 1.08($\pm$ 0.041). This result is comparable with the global average result.
 
 \subsubsection{KMeans}
 We cluster the users into 20 groups using the KMeans setup from Task 1
-and repeat the experiments. For a new user, we predict the rating as the weighted mean of its friends' cluster. This gave us a MAE of
-1.08 , 0.04.
-Another try where the mean was done over the unique clusters or using only the most common cluster, gave us MAE of 1.49.
-Another try with 100 friends 1.55.
-
+and repeat the experiments. For a new user, we predict the count as the  mean of its friends' cluster. This gave us a MAE of
+1.08($\pm$ 0.04). This is similar with the best prediction from the above approach and with the baseline global average. 
 Although KMeans with 20 features behaves similar with the baseline global average, we decided to use this on our newly predicted data.
+
+We mention that we had other unsuccessful experiments where the clusters were updated with the mean of the unique values or using only the most common cluster (test MAE = 1.49), KMeans with 100 clusters (test MAE = 1.55). Same results obtained with 30 friends.
 
 \subsection{Summary}
 Skwes the results, it is more important to have correct predictions on the users with hight counts. Looking back, we could have kep track of the max and median value of the test error to asses the accuracy of our results.
