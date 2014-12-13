@@ -1,4 +1,4 @@
-function [U, A] = RecomALS(R, k, lambda, maxIters)
+function [U, A, Eold] = RecomALS(R, k, lambda, maxIters)
 %
 % Alternating Least-Squares (ALS) algorithm
 % INPUT:
@@ -12,7 +12,7 @@ function [U, A] = RecomALS(R, k, lambda, maxIters)
  indices = R(:,1)~=0;
  value = mean(R(indices,1));
  A = randn(k,m);
- A(:,1) = value;
+ %A(:,1) = value;
 
 % Initialize algorithm parametes
   s = 1;
@@ -24,15 +24,6 @@ function [U, A] = RecomALS(R, k, lambda, maxIters)
   
   while ( s <= maxIters && err > eps )
       
-%       for i = 1:size(R, 1)
-%        for j = 1:size(R, 2)
-%            if(R(i, j) > 0)
-%                % Updating the values of U and A matrices
-%                U(i,:) = R(i,:)*A'*pinv(A*A');
-%                A(:,j) = pinv(U'*U)*U'*R(:,j);
-%            end
-%        end
-%       end
 	  U = updateU(R, A, k, lambda); 
 	  A = updateA(R, U, k, lambda);
 	 
@@ -48,20 +39,11 @@ function [U, A] = RecomALS(R, k, lambda, maxIters)
 end
 
 function cost = calcCost(R, U, A)
-%     [n, m] = size(R);
-%     numOfnnz = 0;
-%     cost = 0.0;
-%    pp =U*A;
-%     for k=1:n 
-%          On = find(R(k,:)~=0);
-%          numOfnnz = numOfnnz + sum(On);
-%          cost = cost + sum((R(k,On) - pp(k,On)).^2);
-%     end
-%     cost = cost/numOfnnz
-   pp =U*A;
-   nz_indices = find(R ~=0);
-   cost2 = sum((R(nz_indices) - pp(nz_indices)).^2);
-   cost = cost2 / size(nz_indices,1);
+   pp = U*A;
+   nz_indices = find(R ~= 0);
+   cost = sum((R(nz_indices) - pp(nz_indices)).^2);
+   cost = cost / size(nz_indices,1);
+   cost = sqrt(cost);
 end
 
 function A = updateA(R, U, k, lambda)

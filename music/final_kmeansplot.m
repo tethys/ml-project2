@@ -23,7 +23,7 @@ hold on
 Ylow = kmeantest - kstdtest;
 Yhigh = kmeantest + kstdtest;
 for i=1:8
-    line([i,i],[Ylow(i),Yhigh(i)]);
+  %  line([i,i],[Ylow(i),Yhigh(i)]);
 end
 set(gca,'XTickLabel',tick_labels)
 print -dpdf kmeans_test.pdf

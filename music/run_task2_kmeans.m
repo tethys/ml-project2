@@ -22,8 +22,8 @@ for i = 1:nbr_iterations
         maxIters = 5;
             
         Ytrain_new(Ytrain_new~=0) = log(Ytrain_new(Ytrain_new~=0));
-        [clusters, cluster_assignment, train_error] = KMeans_complex_train(full(Ytrain_new), ...
-                                           20, ...
+        [clusters, cluster_assignment, train_error] = KMeansNormal_train(full(Ytrain_new), ...
+                                           30, ...
                                            maxIters);
         Ypredicted = zeros(size(Ytest_strong));
         for u =1:nbr_new_users
@@ -60,4 +60,4 @@ for i = 1:nbr_iterations
        fprintf('iterations %f \n', test_error)
     end
 end
-save('train_test_mae_strong_20kmeans_complex_friends.mat', 'meanTestMAE')
+save('train_test_mae_strong_30kmeans_normal_friends.mat', 'meanTestMAE')

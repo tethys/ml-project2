@@ -8,7 +8,7 @@ strain = std(meanTrainRMSE');
 plot(mtrain);
 
 hold on;
-plot(strain);
+%plot(strain);
 
 figure
 meanTestRMSE = reshape(meanTestRMSE,[6,20]);
@@ -16,4 +16,4 @@ mtest = mean(meanTestRMSE,2);
 stest = std(meanTestRMSE');
 plot(mtest);
 hold on;
-plot(stest);
+%plot(stest);

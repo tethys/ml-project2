@@ -4,14 +4,13 @@ nbr_users = size(Ytrain,1);
 nbr_artists = size(Ytrain,2);
 %% average count and std per user
 indices = (Ytrain~=0);
-%gm = geomean(Ytrain(indices));
-gm = 1;
-Ytrain(indices) = gm*log(Ytrain(indices));
+Ytrain(indices) = log(Ytrain(indices));
 
 sum_per_user = sum(Ytrain,2);
 sum_one_per_user = sum(indices,2);
 mean_user = sum_per_user./sum_one_per_user;
 [mean_user, sort_indices] = sort(mean_user,'descend');
+mean(mean_user)
 std_per_user = zeros(nbr_users, 1);
 
 for i=1:nbr_users
@@ -22,6 +21,9 @@ for i=1:nbr_users
 end
 
 hist(mean_user,100)
+hx =xlabel('Log listening counts per user');
+set(hx, 'fontsize',14,'fontname','avantgarde','color',[.3 .3 .3]);
+print -dpdf histCountPerUser.pdf
 
 figure
 plot(mean_user, '*')
@@ -35,7 +37,12 @@ end
 %% average count and std per artist
 sum_per_artist = sum(Ytrain,1);
 sum_one_per_artist = sum(indices,1);
-mean_artist = sum_per_artist./sum_one_per_artist;
+zerosi = sum_one_per_artist == 0;
+sum(zerosi)
+%sum_per_artist(zerosi) =[];
+%sum_one_per_artist(zerosi) = [];
+mean_artist = sum_per_artist./(sum_one_per_artist);
+%mean(mean_artist)
 [mean_artist, sort_indices] = sort(mean_artist,'descend');
 std_per_artist = zeros(1, nbr_artists);
 
@@ -47,7 +54,11 @@ for i=1:nbr_artists
 
 end
 figure
-hist(mean_artist, 1000)
+hist(mean_artist, 500)
+
+hx =xlabel('Log listening counts per artist');
+set(hx, 'fontsize',14,'fontname','avantgarde','color',[.3 .3 .3]);
+print -dpdf histCountPerArtist.pdf
 figure
 plot(mean_artist, '*')
 hold on;

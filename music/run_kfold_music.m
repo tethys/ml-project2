@@ -2,7 +2,7 @@
 clear all;
 load songTrain;
 nbr_features = [20];
-nlambda = [0.01, 0.1,0.5, 1];
+nlambda = [0.01, 0.05, 0.1, 0.5];
 nbr_iterations = 1;
 K = 10;
 NF = 1;
@@ -19,15 +19,15 @@ for f_index = 1:NF
             [Ytest_weak, Ytrain_new, Gtrain_new, ...
                 Ytest_strong,Gstrong, dd,nn] = splitDataKFold(Ytrain, Gtrain,seed_value, ...
                 kfold_iter, K);
-            maxIters = 5;
+            maxIters = 10;
             
             Ytrain_new(Ytrain_new~=0) = log(Ytrain_new(Ytrain_new~=0));
             [U, A, train_error] = RecomExponentialALS(full(Ytrain_new), ...
                                            nbr_features(f_index),...
                                            nlambda(l_index), ...
                                            maxIters);
-            Ypredicted = exp(U * A);
-            test_error = RMSE(Ypredicted, Ytest_weak);
+            Ypredicted = (U * A);
+            test_error = MAE(Ypredicted, Ytest_weak);
             meanTrainRMSE(f_index, l_index, i, kfold_iter) = train_error;
             meanTestRMSE(f_index, l_index, i, kfold_iter) = test_error;
             fprintf('iterations %f %f\n', test_error, train_error)
@@ -36,4 +36,4 @@ for f_index = 1:NF
   end
 end
 
-save('train_test_rmse_expALS_find_lambda.mat','meanTrainRMSE', 'meanTestRMSE')
+save('train_test_rmse_expALS_find_final.mat','meanTrainRMSE', 'meanTestRMSE')
