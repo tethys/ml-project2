@@ -1,48 +1,29 @@
 \subsection{Data description}
-The training data $imgs$ contains 8545 color images of size 105x43. From every image a HOG descriptor 26x10x36 was extracted and converted into a vector of total length 9360. All of these descriptors form the training data that we will work on. 
-
-\noindent We notice that there are 7308 images without presence of people (negative images) and 1237 with (positive images). Fig\ref{fig:starting_images} presents a typical example from each category along with the corresponding feature descriptor.
+The training data $imgs$ contains 8545 color images of size 105x43. From every image a HOG descriptor 26x10x36 was extracted and converted into a vector of total length 9360. All of these descriptors make up the training data on which we will work on.  We noticed that there are more images without people (7308 negative samples) then with people (1237 positive samples). 
 
 \noindent Our task is to train various classifiers, so that we will be able to detect the presence of people in new images. For this purpose we evaluate five classifiers, measuring the accuracy of their estimations using Receiver Operating Characteristics (ROC) curves.
 
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-   \includegraphics[width=\textwidth]{figures/positive_image.pdf}
-    \caption{Positive image.}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{figures/negative_image.pdf}
-    \caption{Negative image.}
-  \end{subfigure}
-  \caption{Examples of positive and negative images and their corresponding feature descriptors.}
-  \label{fig:starting_images}
-\end{figure}
-
 \subsection{Data preprocessing}
-\noindent We assume that there are no outliers, since the images are manually annotated. We work on the extracted features so we normalize the 9360 dim vectors to have  0 mean and standard deviation 1.
+\noindent We assume that there are no outliers, since the images are manually annotated. We work on the extracted features so we normalize the 9360 dim vectors to have  0 mean and standard deviation 1. For all the methods presented below we used 5 fold cross validation.
 
-For all the methods presented below we used 5 fold cross validation.
-
-\noindent The methods that we compare are the Naive Bayes classifier, the Logistic and Penalized logistic regresion, the Support Vector Machine (SVM), the K-NN classifier, and the Neural Network classifier. All of them are compared also with the random guess of the class in a later subsection of the report.\textcolor{red}{TODO do we do this}
-
-\noindent We note that before the experiments we tried using PCA for reducing the dimensionality of the feature descriptors. The reduction in dimensionality was minimal but at a huge computational cost so we decided to drop it.
+\noindent The methods that we compare are: Naive Bayes classifier, Logistic and Penalized Logistic Regresion, Support Vector Machine (SVM),  K-NN, and Neural Network classifier. 
+We note that before the experiments we tried using PCA for reducing the dimensionality of the feature descriptors. The reduction in dimensionality was minimal but at a huge computational cost so we decided to drop it.
 \textcolor{red}{TODO ask vasilis what was the reduction}
 
 \subsection{Naive Bayes classifier}
 \noindent In this part we tried to fit a Naive Bayes classifier to our data. For this, we made the assumption that the data is normally distributed and the estimates of the prior probabilities can be estimated empirically from the relative frequencies of the classes in training samples.
 
-\noindent The results from the K-fold validation were not very satisfying, since the average TPR was very low (0.031). This may be caused by the strong assumptions that we made in order to fit this model. Naive Bayes model assumes that the processed data follows a specific distribution (in our case Gaussian), but also that the value of a particular feature is uncorrelated with the presence or absence of any other feature, given the variable of the class. In our case, this is possibly wrong, so the classifier cannot fit an appropriate model.
+\noindent The results from the K-fold validation were not very satisfying, since the average TPR was very low (0.031). This may be caused by the strong assumptions that we made in order to fit this model. Naive Bayes model assumes that the processed data follows a specific distribution (in our case Gaussian), but also that the value of a particular feature is uncorrelated with the presence or absence of any other feature, given the variable of the class. In our data, this is possibly not the case, so the classifier cannot fit an appropriate model.
 
 \subsection{Logistic and Penalized Logistic Regression}
-\noindent Our goal in this part was to train a simple Logistic Regression model and its Penalized version. We chose a learning parameter $\alpha = 10^{-2}$, since all of the values close to this performed well enough for our experiments. Moreover, regarding the value for $\lambda$ in case of the penalized logistic regression, we have to mention that all of the values that were used performed the same. This is the reason that both of the method give the same results, with average TPR equal to 0.754.
+\noindent Our goal in this part was to train a simple Logistic Regression model and its Penalized version as baseline methods. We chose a learning parameter $\alpha = 10^{-2}$, since all the values close to this performed well enough for our experiments. Regarding the value  $\lambda$ for penalized logistic regression, all of the values that were used performed the same.  Both of the methods give the same results, with average TPR equal to 0.754.
 
 \noindent By adding a penalization term, we tried to prevent overfitting by imposing penalty on large fluctuations of the model parameters and reduce the influence of the outliers to our model. The data, as we mentioned before, does not have outliers and the fluctuations at the model parameters are avoided by the nature of our data. This is possibly the reason that both models perform similarly. 
 
 \subsection{Support Vector Machines}
-\noindent For this part of the experiments we used the LIBSVM 3.20\footnote{http://www.csie.ntu.edu.tw/~cjlin/libsvm/} toolbox that supports SVM with various kernels.  We performed analysis and K-fold validation on linear-kernel SVM, polynomial-kernel SVM with degrees 2 and 3, radial-basis-function SVM and sigmoid-kernel SVM. In all of the cases we used the scores that were given by the program to compute the TPR and the FPR. A comparison of the various model is given in Fig \ref{fig:SVM}.
+\noindent For this part of the experiments we used the LIBSVM 3.20\footnote{http://www.csie.ntu.edu.tw/~cjlin/libsvm/} toolbox that supports SVM with various kernels.  We performed analysis and K-fold validation on linear-kernel SVM, polynomial-kernel SVM with degrees 2 and 3, radial-basis-function SVM and sigmoid-kernel SVM. In all the models we used the scores that were given by the program to compute the TPR and the FPR. A comparison of the various model is given in Fig \ref{fig:SVM}.
 
-\noindent We can observe that the radial-basis-kernel SVM perform significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also observing the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is the polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $2 10e{-3}$. The rest of the classifiers perform well for FPR greater than $2 10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.  Cubic SVM performed worse than Quadratic SVM probably due to overfitting on the training data.
+\noindent We can observe that the RBF SVM performs significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also observing the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $2 10e{-3}$. The rest of the classifiers perform well for FPR greater than $2 10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.  Cubic SVM performed worse than Quadratic SVM probably due to overfitting on the training data.
 
 \noindent Moreover, in Table \ref{table:SVM_success} we present the average percentage of the successful classifications that were made during the K-fold validation, as they are given by the program.
 
@@ -53,7 +34,7 @@ For all the methods presented below we used 5 fold cross validation.
   SVM kernel & Linear & Quadratic & Cubic & RBF & Sigmoid \\ \hline
   Average success rate (\%) & 94.81 & 97.22 & 91.45 & 98.43 & 84.68 \\ \hline
   \end{tabular}
-  \captionof{table}{Average percentage for the success rate for the various kernels of the SVM classifier, as they are given by the program of the LIBSVM 3.20 toolbox.}
+  \captionof{table}{Average percentage for the success rate of various kernels of the SVM classifier.}
   \label{table:SVM_success}
 \end{table}
     
@@ -61,7 +42,8 @@ For all the methods presented below we used 5 fold cross validation.
 \noindent For this experiments we used a KNN library, which we modified a lot in order to compute and return as output not only the class labels, but also the scores of the prediction.
 We used Euclidean Distance as distance measure between samples and varied the number of neighbours between 5, 9, 15, 19 and 25. 
 
-\noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. There we observe that all of the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. These observations can be explained by the distribution of the data, where most probably they are distributed in the N-dimensional (N = 9360) space with such a way that their neighbours can specify, with high probability, the class that they belong to.
+\noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. There we observe that all of the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. For FPR greater than  $10^{-3}$
+the algorithms perform similarly, resulting in almost overlapping curves.
 
 \begin{figure}[h]
   \centering
@@ -81,11 +63,11 @@ We used Euclidean Distance as distance measure between samples and varied the nu
 \subsection{Neural Network}
 Neural Networks are powerfull tools able to learn complex decisions boundaries. Besides the computational cost, their major drawback is the high amount of parameters needed to be tuned for a specific problem, making them harder to train.
 
-The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 swipes through the data. The activation functions were also kept fixed to tanh (hyperbolic tangent) and sigmoid at the last layer. 
+The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 passes through the data. The activation functions were also kept fixed to tanh (hyperbolic tangent) and sigmoid at the last layer. 
 
 Using cross validation for a network with just one hidden layer of 50 neurons we determined the learning parameter $\alpha$, which we later used for bigger network setups. Fig.\ref{fig:NNa}  shows the ROC curves for $\alpha$ in  $[0.01,0.1,1,10]$.
 
-Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100],[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we increase the model complexity by adding more neurons per layer or more hidden layers. The network $200-100$seemed to perform the best. One reason why $300-50$ did not perform better is either overfitting at the first layer or too few neurons at the second layer. Due to time and computationally contraint, we also run $200,100,50$ and $300,100,50$ but we obtained results similar with $200,100$.
+The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100],[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we  can increase the model complexity by adding more neurons per layer or more hidden layers.  We could have easily increased and test larger networks if it were not for the time and computational contraints. Not suprisingly, our best setup consists in the biggest network. We see that increasing the size of the network leads to less FPR and better performance in general, meaning we have not yet reached an overfitting point.
 
 \begin{figure}[h]
   \centering
@@ -95,16 +77,13 @@ Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100
     \label{fig:NNa}
   \end{subfigure}
   \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{figures/NN-2layers.png}
+    \includegraphics[width=\textwidth]{figures/NN-2layers.pdf}
     \caption{}
     \label{fig:NNb}
   \end{subfigure}
   \caption{ROC curves created using: (a) NN with one hidden layer of 50 neurons, $\alpha$ in $[0.01,0.1,1,10]$ (b) NN with two layers of various sizes. In the legend, NN-50-20 corresponds to a network of 50 and respectively 20  neurons for the 1st and 2nd hidden layer.}
 \end{figure}
 
-\subsection{Convolutional Neural Network}
-We experimented a bit with convolutional neural networks. Our tests were unreasonable slow. We tried 6-12 and 5x5 kernels. This is a  very small netwroks which performed bad. In order to have meaningful results we should have increased both parameters. We mention also that the library used did not offer the option of adding more hidden layers between the last convolutional and pool layer and the output. We believe this is a major drawback of the library, as the majority of setups used in literature have extra layers.
-
 \subsection{Comparison}
-To sum up, our best performance models on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe more complex models would have fitted better. 
-We note that our models depend on the descriptiveness of the HOG features and their discriminative property. Using the same models but with different feature descriptors would have changed the rankings of our best models. CNN avoid the problem of feature selection, which makes them attractive for vision problems. 
+To sum up, the models that performed best on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe more complex models would have fitted better. 
+We note that our models depend on the discriminative power of the HOG features. Using the same models but with different feature descriptors would have changed the rankings of our best models. 
