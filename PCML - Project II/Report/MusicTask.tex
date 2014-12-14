@@ -77,63 +77,23 @@ We note that the final MAE is composed of various values, small and large. In Fi
 We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
 \textcolor{red}{TODO}
 
-Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
-
-\begin{minipage}{\textwidth}
-  \begin{minipage}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_lambda.pdf}
-    \captionof{figure}{Comparison of Train and Test errors with different lambda values}
-    \label{fig:ALS_lambdas}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
-	\centering
-    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_features.pdf}
-    \captionof{figure}{Comparison of Train and Test errors with different features values}
-    \label{fig:ALS_features}
-    \end{minipage}
-  \end{minipage}
-  
-\begin{minipage}{\textwidth}
-  \begin{minipage}[b]{0.45\textwidth}
+Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation .The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
 \begin{center}
   \begin{tabular}{ |l | c | c| }
     \hline
-     lambda & MAE train & MAE test \\ \hline
-     0.01   & 0.088 ($\pm$  0.0008) &  1.591 ($\pm$ 0.015) \\ \hline
-     0.05  &  0.163 ($\pm$  895) &  0.901 ($\pm$  0.0061) \\ \hline
-     0.1     & 0.259 ($\pm$ 851)  & 0.822 ($\pm$ 0.0012) \\ \hline
-     0.5    & 0.660  ( $\pm$ 851) & 0.864 ($\pm$  0.0016)\\ \hline
-     1       & 1.035 ($\pm$ 842) & 1.222($\pm$  0.0010)\\ \hline
-     1.5    & 1.493 ($\pm$ 837) & 1.670($\pm$  0.0007) \\
+     lambda & RMSE train & RMSE test \\ \hline
+     0.01   & 5075 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
+     0.05  &  3355 ($\pm$  895)            &                1.14 ($\pm$  0.02)                   \\ \hline
+     0.1     & 3350 ($\pm$ 851)  & 1.58 ($\pm$ 0.06) \\ \hline
+     0.5    & 3341  ( $\pm$ 851)   &13.93 ($\pm$ 0.86)\\ \hline
+     1       & 3387 ($\pm$ 842)   &25.30($\pm$ 1.48)\\ \hline
+     1.5    & 3416 ($\pm$ 837) & 44.25($\pm$ 2.93) \\
     \hline
   \end{tabular}
   	\label{table:labda_choice}
-    \captionof{table}{Estimated Train and Test MAE for the two blob models.}
+    \captionof{table}{Estimated Train and Test RMSE for the two blob models.}
 \end{center}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
-\begin{center}
-  \begin{tabular}{ |l | c | c| }
-    \hline
-     features & MAE train & MAE test \\ \hline
-     10   & 0.253 ($\pm$  0.0017) &  0.927 ($\pm$ 0.0080) \\ \hline
-     20  &  0.163 ($\pm$  0.0009) &  0.901 ($\pm$  0.0061) \\ \hline
-     30     & 0.133 ($\pm$ 0.0009)  & 0.873 ($\pm$ 0.0047) \\ \hline
-     40    & 0.124  ( $\pm$ 0.0008) & 0.868 ($\pm$  0.0044)\\ \hline
-     50       & 0.121 ($\pm$ 0.0007) & 0.880($\pm$  0.0038)\\ \hline
-     100    & 0.122 ($\pm$ 0.0007) & 0.989($\pm$  0.0053) \\
-    \hline
-  \end{tabular}
-  	\label{table:feature_choice}
-    \captionof{table}{Estimated Train and Test MAE for the two blob models.}
-\end{center}
-    \end{minipage}
-  \end{minipage}
-  
-We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.05 for the next experiments.
+We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.1 for the next experiments.
 Our algorithm did a good job training  with a RMSE less than  3 but a bad job on unseen data with RMSE > 3000, meaning it is overfitting 
 the training data and incrasing the value of lambda, the regularization parameter did not help.
 
@@ -153,7 +113,7 @@ We notice that the test error across the 10 different splits of the cross valida
   \label{fig:new_plot}
 \end{figure}
 
-We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.05$ and repeteated the experiments with different seed.
+We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.1$ and repeteated the experiments with different seed.
  Giving train  between 1.24 increasing up to  2.4 for 19 features.  The test RMSE  
  was always in the interval [3569,3546]. None of this results results proved meaningful.
 

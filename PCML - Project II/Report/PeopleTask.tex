@@ -78,5 +78,29 @@ For all the methods presented below we used 5 fold cross validation.
 \end{figure}
 
 \subsection{Neural Network}
+Neural Networks are powerfull tools able to learn complex decisions boundaries. Besides the computational cost, their major drawback is the high amount of parameters needed to be tuned for a specific problem, making them harder to train.
+
+The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 swipes through the data. The activation functions were also kept fixed to tanh and sigmoid at the last layer. 
+
+Using cross validation for a network with just one hidden layer of 50 neurons we determined the learning parameter $\alpha$, which we later used for bigger network setups. Fig.\ref{fig:NNa}  shows the ROC curves for $\alpha$ in  $[0.01,0.1,1,10]$.
+
+Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100],[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we increase the model complexity by adding more neurons per layer or more hidden layers. The network $200-100$seemed to perform the best. One reason why $300-50$ did not perform better is either overfitting at the first layer or too few neurons at the second layer. Due to time and computationally contraint, we also run 200,100,50 and 300,100,50 and obtained the result in.
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+   \includegraphics[width=\textwidth]{figures/NN-alpha.png}
+    \caption{}
+    \label{fig:NNa}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/NN-2layers.png}
+    \caption{}
+    \label{fig:NNb}
+  \end{subfigure}
+  \caption{ROC curves created using: (a) NN with one hidden layer of 50 neurons, $\alpha$ in $[0.01,0.1,1,10]$ (b) NN with two layers of various sizes. In the legend, NN-50-20 corresponds to a network of 50 and respectively 20  neurons for the 1st and 2nd hidden layer.}
+\end{figure}
+
 \subsection{Convolutional Neural Network}
+We experimented a bit with convolutional neural networks. Our tests were unreasonable slow. We tried 6-12 and 5x5 kernels. This is a  very small netwroks which performed bad. In order to have meaningful results we should have increased both parameters. We mention also that the library used did not offer the option of adding more hidden layers between the last convolutional and pool layer and the output. We believe this is a major drawback of the library, as the majority of setups used in literature have extra layers.
 \subsection{Comparison}
