@@ -70,66 +70,138 @@ per artist prediction. All of these methods give similar MAE results:  1.1117($p
 We note that the final MAE is composed of various values, small and large. In Fig we can see a ploto of the MAE error terms in log format.
 
 \subsubsection{KNN}
-\textcolor{red}{TODO}
+K-nearest neighbors (KNN) algorithm is the first approach. In this approach, compared to other methods, there is no model and model parameters. We determine the listening count of a user on a artist by estimating the similarities of users, and considering $k$ listening counts of $k$ similar users on the artist. We use pearson metric between two users:
+\begin{equation}
+  similarity(u1, u2)=\frac{\sum_{i\in u1 \bigcap u2} (R_{u1,i} - \bar{R_u1})(R_{u2,i} - \bar{R_u2})}{\sqrt{\sum_{i\in u1 \bigcap us2} (R_{u1,i} - \bar{R_{u1}})^2 \sum_{i\in u1 \bigcap u2} (R_{u2,i} - \bar{R_{u2}})^2}}
+\end{equation}
+In recommendation phase, the following formula gives the predicted listening count of a user for an artist:
+ \begin{equation}
+  p(u, i)=\frac{\sum_{k \in N} similarity(u, k) (R_{k,i} - \bar{R_k})}{\sum_{k \in N} | similarity(u, k) |}
+\end{equation}
+The number of nearest neighbor, $k$, in KNN method is the only parameter that should be set. The best value for k depends upon the data. Therefore, we selected the good $k$ value by cross-validation technique. Using $10$ among $[5, 10, 15, 20, 30]$ gives the best results for KNN as can be seen from table \ref{table:features_KNN_choice}. 
 
+\begin{minipage}{\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/KNN_kvalue.pdf}
+    \captionof{figure}{Comparison of Train and Test errors with different k values}
+    \label{fig:KNN_kvalues}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.5\textwidth}
+  \begin{center}
+  \begin{tabular}{ |l | c | c| }
+    \hline
+     k & MAE train & MAE test \\ \hline
+     5   & 2.33 ($\pm$  0.05) &  2.26 ($\pm$  0.076) \\ \hline
+     10  &  2.03 ($\pm$  0.049) &  1.93 ($\pm$  0.068) \\ \hline
+     15     &  1.94 ($\pm$ 0.049)  & 1.93 ($\pm$ 0.060) \\ \hline
+     20    & 1.90  ( $\pm$ 0.049) & 1.93 ($\pm$ 0.057)\\ \hline
+     30     & 1.86 ($\pm$ 0.049) & 1.93($\pm$  0.056)\\ \hline
+  \end{tabular}
+  	\label{table:features_KNN_choice}
+    \captionof{table}{Estimated Train and Test MAE for K-Nearest Neighbors}
+\end{center}
+\vspace{10 mm}
+    \end{minipage}
+  \end{minipage}
+
+Increasing the $k$ value up to $10$ reduces both test and train error. After $10$, increasing the value of $k$ doesn't change the test error but continues to reduce the train error for our data. Increasing the $k$ value cause overfitting where test error is very big than train error, so we selected $15$ as an optimal value for $k$. The results gave a MAE $1.9$ for the test error. 
 
 \subsubsection{ALS}
 We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
 \textcolor{red}{TODO}
 
-Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation .The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
-\begin{center}
+Using value of 20 for features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
+
+\begin{minipage}{\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_lambda.pdf}
+    \captionof{figure}{Comparison of Train and Test errors with different lambda values}
+    \label{fig:ALS_lambdas}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.5\textwidth}
+  \begin{center}
   \begin{tabular}{ |l | c | c| }
     \hline
-     lambda & RMSE train & RMSE test \\ \hline
-     0.01   & 5075 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
-     0.05  &  3355 ($\pm$  895)            &                1.14 ($\pm$  0.02)                   \\ \hline
-     0.1     & 3350 ($\pm$ 851)  & 1.58 ($\pm$ 0.06) \\ \hline
-     0.5    & 3341  ( $\pm$ 851)   &13.93 ($\pm$ 0.86)\\ \hline
-     1       & 3387 ($\pm$ 842)   &25.30($\pm$ 1.48)\\ \hline
-     1.5    & 3416 ($\pm$ 837) & 44.25($\pm$ 2.93) \\
+     lamb & MAE train & MAE test \\ \hline
+     0.01   & 0.088 ($\pm$  0.0008) &  1.591 ($\pm$ 0.015) \\ \hline
+     0.05  &  0.163 ($\pm$  895) &  0.901 ($\pm$  0.0061) \\ \hline
+     0.1     & 0.259 ($\pm$ 851)  & 0.822 ($\pm$ 0.0012) \\ \hline
+     0.5    & 0.660  ( $\pm$ 851) & 0.864 ($\pm$  0.0016)\\ \hline
+     1       & 1.035 ($\pm$ 842) & 1.222($\pm$  0.0010)\\ \hline
+     1.5    & 1.493 ($\pm$ 837) & 1.670($\pm$  0.0007) \\
     \hline
   \end{tabular}
   	\label{table:labda_choice}
-    \captionof{table}{Estimated Train and Test RMSE for the two blob models.}
+    \captionof{table}{Estimated Train and Test MAE for different lambdas}
 \end{center}
-We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.1 for the next experiments.
-Our algorithm did a good job training  with a RMSE less than  3 but a bad job on unseen data with RMSE > 3000, meaning it is overfitting 
-the training data and incrasing the value of lambda, the regularization parameter did not help.
+	\vspace{10 mm}
+    \end{minipage}
+  \end{minipage}
+  
+We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we selected lambda to be $0.05$ for the next experiments. 
 
+%We notice that the test error across the 10 different splits of the cross validation has values from 2000 to up to 6000. This is an artifact of the high listening counts present in the long tail and the randomness of the split.
+%\begin{figure}[h]
+%  \centering
+%  \begin{subfigure}[b]{0.45\textwidth}
+%   \includegraphics[width=\textwidth]{figures/distributionRMSE.pdf}
+%    \caption{}
+%  \end{subfigure}
+%  \begin{subfigure}[b]{0.45\textwidth}
+%    \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
+%    \caption{}
+%  \end{subfigure}
+%  \caption{Distribution per user (a) and per artist(b) log of listenining count distribution}
+%  \label{fig:new_plot}
+%\end{figure}
+ 
+ \begin{minipage}{\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
+\centering
+    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_features.pdf}
+    \captionof{figure}{Comparison of Train and Test errors with different features values}
+    \label{fig:ALS_features}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.5\textwidth}
+\begin{center}
+  \begin{tabular}{ |l | c | c| }
+    \hline
+     feat & MAE train & MAE test \\ \hline
+     10   & 0.253 ($\pm$  0.0017) &  0.927 ($\pm$ 0.0080) \\ \hline
+     20  &  0.163 ($\pm$  0.0009) &  0.901 ($\pm$  0.0061) \\ \hline
+     30     & 0.133 ($\pm$ 0.0009)  & 0.873 ($\pm$ 0.0047) \\ \hline
+     40    & 0.124  ( $\pm$ 0.0008) & 0.868 ($\pm$  0.0044)\\ \hline
+     50       & 0.121 ($\pm$ 0.0007) & 0.880($\pm$  0.0038)\\ \hline
+     100    & 0.122 ($\pm$ 0.0007) & 0.989($\pm$  0.0053) \\
+    \hline
+  \end{tabular}
+  	\label{table:feature_choice}
+    \captionof{table}{Estimated Train and Test MAE for different features}
+\end{center}
+\vspace{10 mm}
+    \end{minipage}
+  \end{minipage}
+  
+We varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$ and repeated the experiments with different seed. Giving train error from $0.122$ increasing up to $0.253$ while the test MAE is $0.989$ for maximum and $0.88$ for minimum. Even though value $50$ for features is best for train error, we choose $40$ because it give better results for both test and train error. The results gave a MAE less than $0.8$ for the test error when $\lambda$ is $0.05$, and feature count is $40$.
 
-We notice that the test error across the 10 different splits of the cross validation has values from 2000 to up to 6000. This is an artifact of the high listening counts present in the long tail and the randomness of the split.
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-   \includegraphics[width=\textwidth]{figures/distributionRMSE.pdf}
-    \caption{}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
-    \caption{}
-  \end{subfigure}
-  \caption{Distribution per user (a) and per artist(b) log of listenining count distribution}
-  \label{fig:new_plot}
-\end{figure}
-
-We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.1$ and repeteated the experiments with different seed.
- Giving train  between 1.24 increasing up to  2.4 for 19 features.  The test RMSE  
- was always in the interval [3569,3546]. None of this results results proved meaningful.
-
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-   \includegraphics[width=\textwidth]{figures/als_train.pdf}
-    \caption{}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{figures/als_test.pdf}
-    \caption{}
-  \end{subfigure}
-  \caption{Train and Test RMSE for logALS with varying number of features}
-  \label{fig:new_plot}
-\end{figure}
+%\begin{figure}[h]
+%  \centering
+%  \begin{subfigure}[b]{0.45\textwidth}
+%   \includegraphics[width=\textwidth]{figures/als_train.pdf}
+%    \caption{}
+%  \end{subfigure}
+%  \begin{subfigure}[b]{0.45\textwidth}
+%    \includegraphics[width=\textwidth]{figures/als_test.pdf}
+%    \caption{}
+%  \end{subfigure}
+%  \caption{Train and Test RMSE for logALS with varying number of features}
+%  \label{fig:new_plot}
+%\end{figure}
 
 \subsubsection{Kmeans}
 Although the number of artists is 10 times larger than the number of users,
