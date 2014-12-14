@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  15 DEC 2014 00:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  15 DEC 2014 00:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -452,149 +452,155 @@ Underfull \vbox (badness 1867) has occurred while \output is active []
 
  [2 <./figures/histYtrain_crop.pdf> <./figures/histLogYtrain_crop.pdf> <./figur
 es/histCountPerUser.pdf> <./figures/histCountPerArtist.pdf>]
-<figures/KNN_kvalue.pdf, id=5003, 597.23125pt x 845.1575pt>
-File: figures/KNN_kvalue.pdf Graphic file (type pdf)
-
-<use figures/KNN_kvalue.pdf>
-Package pdftex.def Info: figures/KNN_kvalue.pdf used on input line 86.
-(pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
-
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 87.
+(caption)                particular \caption on input line 94.
 See the caption package documentation for explanation.
 
+<figures/distributionRMSE.pdf, id=5003, 499.3857pt x 375.80403pt>
+File: figures/distributionRMSE.pdf Graphic file (type pdf)
 
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 103.
-See the caption package documentation for explanation.
+<use figures/distributionRMSE.pdf>
+Package pdftex.def Info: figures/distributionRMSE.pdf used on input line 105.
+(pdftex.def)             Requested size: 178.86702pt x 134.60123pt.
+File: figures/histCountPerArtist.pdf Graphic file (type pdf)
+ <use figures/histCountPerArtist.pdf>
+Package pdftex.def Info: figures/histCountPerArtist.pdf used on input line 109.
 
-<figures/ALS_lambda.pdf, id=5006, 597.23125pt x 845.1575pt>
-File: figures/ALS_lambda.pdf Graphic file (type pdf)
+(pdftex.def)             Requested size: 178.86702pt x 146.92627pt.
 
-<use figures/ALS_lambda.pdf>
-Package pdftex.def Info: figures/ALS_lambda.pdf used on input line 120.
-(pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
+<figures/als_train.pdf, id=5004, 487.09982pt x 390.25804pt>
+File: figures/als_train.pdf Graphic file (type pdf)
 
+<use figures/als_train.pdf>
+Package pdftex.def Info: figures/als_train.pdf used on input line 123.
+(pdftex.def)             Requested size: 178.86702pt x 143.30347pt.
 
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 121.
-See the caption package documentation for explanation.
+<figures/als_test.pdf, id=5005, 493.60414pt x 381.58563pt>
+File: figures/als_test.pdf Graphic file (type pdf)
 
+<use figures/als_test.pdf>
+Package pdftex.def Info: figures/als_test.pdf used on input line 127.
+(pdftex.def)             Requested size: 178.86702pt x 138.27321pt.
 
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 139.
-See the caption package documentation for explanation.
+Underfull \vbox (badness 1348) has occurred while \output is active []
 
-[3 <./figures/KNN_kvalue.pdf>]
-<figures/ALS_features.pdf, id=5023, 597.23125pt x 845.1575pt>
-File: figures/ALS_features.pdf Graphic file (type pdf)
-
-<use figures/ALS_features.pdf>
-Package pdftex.def Info: figures/ALS_features.pdf used on input line 165.
-(pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 166.
-See the caption package documentation for explanation.
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 184.
-See the caption package documentation for explanation.
-
-
-Underfull \hbox (badness 1360) in paragraph at lines 213--215
+ [3 <./figures/distributionRMSE.pdf>]
+Underfull \hbox (badness 1360) in paragraph at lines 141--143
 []\OT1/ptm/m/n/10 Inspired by the friend-ship graph in-for-ma-tion, we tried Km
 eans with vary-ing val-ues from
  []
 
-
-Underfull \vbox (badness 7540) has occurred while \output is active []
-
- [4 <./figures/ALS_lambda.pdf> <./figures/ALS_features.pdf>]
-<figures/kmeans_train_test.pdf, id=5044, 484.93173pt x 388.81262pt>
+<figures/kmeans_train_test.pdf, id=5048, 484.93173pt x 388.81262pt>
 File: figures/kmeans_train_test.pdf Graphic file (type pdf)
 
 <use figures/kmeans_train_test.pdf>
-Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 222.
+Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 150.
 (pdftex.def)             Requested size: 178.86702pt x 143.41345pt.
 File: figures/kmeans_train_test.pdf Graphic file (type pdf)
  <use figures/kmeans_train_test.pdf>
-Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 226.
+Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 154.
 (pdftex.def)             Requested size: 178.86702pt x 143.41345pt.
 
-Underfull \vbox (badness 2837) has occurred while \output is active []
 
- [5 <./figures/kmeans_train_test.pdf>]) (./PeopleTask.tex [6] [7]
-<figures/SVM.pdf, id=5085, 374.3586pt x 302.08862pt>
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./figures/als_train.pdf> <./figures/als_test.pdf>] [5 <./figures/kmeans_tr
+ain_test.pdf>]) (./PeopleTask.tex [6]
+<figures/SVM.pdf, id=5093, 374.3586pt x 302.08862pt>
 File: figures/SVM.pdf Graphic file (type pdf)
  <use figures/SVM.pdf>
 Package pdftex.def Info: figures/SVM.pdf used on input line 51.
 (pdftex.def)             Requested size: 194.76982pt x 157.17456pt.
 
-<figures/K_NN.pdf, id=5086, 508.7808pt x 413.3844pt>
+<figures/K_NN.pdf, id=5094, 508.7808pt x 413.3844pt>
 File: figures/K_NN.pdf Graphic file (type pdf)
  <use figures/K_NN.pdf>
 Package pdftex.def Info: figures/K_NN.pdf used on input line 56.
 (pdftex.def)             Requested size: 194.76982pt x 158.25462pt.
 
-<figures/NN-alpha.pdf, id=5090, 493.60411pt x 395.3169pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7] <figures/NN-alpha.pdf, id=5107, 493.60411pt x 395.3169pt>
 File: figures/NN-alpha.pdf Graphic file (type pdf)
 
 <use figures/NN-alpha.pdf>
 Package pdftex.def Info: figures/NN-alpha.pdf used on input line 75.
 (pdftex.def)             Requested size: 194.76982pt x 155.9886pt.
 
-<figures/NN-2layers.pdf, id=5091, 497.21759pt x 397.485pt>
+<figures/NN-2layers.pdf, id=5108, 497.21759pt x 397.485pt>
 File: figures/NN-2layers.pdf Graphic file (type pdf)
 
 <use figures/NN-2layers.pdf>
 Package pdftex.def Info: figures/NN-2layers.pdf used on input line 80.
 (pdftex.def)             Requested size: 194.76982pt x 155.70387pt.
+)
+Underfull \vbox (badness 6412) has occurred while \output is active []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [8 <./figures/SVM.pdf> <./figures/K_NN.pdf>]
+ [8 <./figures/SVM.pdf> <./figures/K_NN.pdf> <./figures/NN-alpha.pdf> <./figure
+s/NN-2layers.pdf>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
- [9 <./figures/NN-alpha.pdf> <./figures/NN-2layers.pdf>]
+ [9]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
  (./paper.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 58.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 58.
-Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 2CD300F1E1EB003294E4630DD8DB84EA;1584.
+
+
+Package rerunfilecheck Warning: File `paper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper.out':
+(rerunfilecheck)             Before: 2CD300F1E1EB003294E4630DD8DB84EA;1584
+(rerunfilecheck)             After:  2610601685807AC4893F0BB701461660;1585.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 58.
  ) 
 Here is how much of TeX's memory you used:
  7970 strings out of 493117
- 118621 string characters out of 6135432
- 214475 words of memory out of 5000000
- 11257 multiletter control sequences out of 15000+600000
+ 118667 string characters out of 6135432
+ 212475 words of memory out of 5000000
+ 11258 multiletter control sequences out of 15000+600000
  25457 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,14n,39p,769b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local
-/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/f
-onts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
-/urw/times/utmr8a.pfb>
-Output written on paper.pdf (9 pages, 1560391 bytes).
+pdfTeX warning (dest): name{figure.caption.8} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.6} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.4} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb>
+Output written on paper.pdf (9 pages, 1561651 bytes).
 PDF statistics:
- 5175 PDF objects out of 6186 (max. 8388607)
- 273 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 271 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5191 PDF objects out of 6186 (max. 8388607)
+ 261 compressed objects within 3 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 253 words of extra memory for PDF output out of 10000 (max. 10000000)
 
