@@ -40,9 +40,9 @@ For all the methods presented below we used 5 fold cross validation.
 \noindent By adding a penalization term, we tried to prevent overfitting by imposing penalty on large fluctuations of the model parameters and reduce the influence of the outliers to our model. The data, as we mentioned before, does not have outliers and the fluctuations at the model parameters are avoided by the nature of our data. This is possibly the reason that both models perform similarly. 
 
 \subsection{Support Vector Machines}
-\noindent For this part of the experiments we used the LIBSVM 3.20 toolbox that supports SVM with various kernels.  We performed analysis and K-fold validation on linear-kernel SVM, polynomial-kernel SVM with degrees 2 and 3, radial-basis-function SVM and sigmoid-kernel SVM. In all of the cases we used the scores that were given by the program to compute the TPR and the FPR. A comparison of the various model is given in Fig \ref{fig:SVM}.
+\noindent For this part of the experiments we used the LIBSVM 3.20\footnote{http://www.csie.ntu.edu.tw/~cjlin/libsvm/} toolbox that supports SVM with various kernels.  We performed analysis and K-fold validation on linear-kernel SVM, polynomial-kernel SVM with degrees 2 and 3, radial-basis-function SVM and sigmoid-kernel SVM. In all of the cases we used the scores that were given by the program to compute the TPR and the FPR. A comparison of the various model is given in Fig \ref{fig:SVM}.
 
-\noindent We can observe that the radial-basis-kernel SVM perform significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also observing the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is the polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $2 10e{-3}$. The rest of the classifiers perform well for FPR greater than $2 10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.
+\noindent We can observe that the radial-basis-kernel SVM perform significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also observing the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is the polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $2 10e{-3}$. The rest of the classifiers perform well for FPR greater than $2 10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.  Cubic SVM performed worse than Quadratic SVM probably due to overfitting on the training data.
 
 \noindent Moreover, in Table \ref{table:SVM_success} we present the average percentage of the successful classifications that were made during the K-fold validation, as they are given by the program.
 
@@ -58,9 +58,10 @@ For all the methods presented below we used 5 fold cross validation.
 \end{table}
     
 \subsection{K-NN classifier}
-\noindent Using the K-NN classifier the most important parameter that we have to specify is the number of the neighbouring samples that will be used as a reference for the method so it will decide for any given sample the class that it belongs to. For our experiments we used a ready function, which we modified a lot in order to compute and give in output the scores of the prediction, except of the class labels. We varied the number of neighbours used among 5, 9, 15, 19 and 25. In addition, the euclidean distances were used as the way to specify the distances among the neighbouring samples.
+\noindent For this experiments we used a KNN library, which we modified a lot in order to compute and return as output not only the class labels, but also the scores of the prediction.
+We used Euclidean Distance as distance measure between samples and varied the number of neighbours between 5, 9, 15, 19 and 25. 
 
-\noindent Figure \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores got from the K-fold validation process. There we observe that all of the classifiers show very good performance, especially, for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. These observations can be explained by the distribution of the data, where most probably they are distributed in the N-dimensional (N = 9360) space with such a way that their neighbours can specify, with high probability, the class that they belong to.
+\noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. There we observe that all of the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. These observations can be explained by the distribution of the data, where most probably they are distributed in the N-dimensional (N = 9360) space with such a way that their neighbours can specify, with high probability, the class that they belong to.
 
 \begin{figure}[h]
   \centering
@@ -80,16 +81,16 @@ For all the methods presented below we used 5 fold cross validation.
 \subsection{Neural Network}
 Neural Networks are powerfull tools able to learn complex decisions boundaries. Besides the computational cost, their major drawback is the high amount of parameters needed to be tuned for a specific problem, making them harder to train.
 
-The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 swipes through the data. The activation functions were also kept fixed to tanh and sigmoid at the last layer. 
+The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 swipes through the data. The activation functions were also kept fixed to tanh (hyperbolic tangent) and sigmoid at the last layer. 
 
 Using cross validation for a network with just one hidden layer of 50 neurons we determined the learning parameter $\alpha$, which we later used for bigger network setups. Fig.\ref{fig:NNa}  shows the ROC curves for $\alpha$ in  $[0.01,0.1,1,10]$.
 
-Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100],[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we increase the model complexity by adding more neurons per layer or more hidden layers. The network $200-100$seemed to perform the best. One reason why $300-50$ did not perform better is either overfitting at the first layer or too few neurons at the second layer. Due to time and computationally contraint, we also run 200,100,50 and 300,100,50 and obtained the result in.
+Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100],[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we increase the model complexity by adding more neurons per layer or more hidden layers. The network $200-100$seemed to perform the best. One reason why $300-50$ did not perform better is either overfitting at the first layer or too few neurons at the second layer. Due to time and computationally contraint, we also run $200,100,50$ and $300,100,50$ but we obtained results similar with $200,100$.
 
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
-   \includegraphics[width=\textwidth]{figures/NN-alpha.png}
+   \includegraphics[width=\textwidth]{figures/NN-alpha.pdf}
     \caption{}
     \label{fig:NNa}
   \end{subfigure}
@@ -103,4 +104,7 @@ Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100
 
 \subsection{Convolutional Neural Network}
 We experimented a bit with convolutional neural networks. Our tests were unreasonable slow. We tried 6-12 and 5x5 kernels. This is a  very small netwroks which performed bad. In order to have meaningful results we should have increased both parameters. We mention also that the library used did not offer the option of adding more hidden layers between the last convolutional and pool layer and the output. We believe this is a major drawback of the library, as the majority of setups used in literature have extra layers.
+
 \subsection{Comparison}
+To sum up, our best performance models on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe more complex models would have fitted better. 
+We note that our models depend on the descriptiveness of the HOG features and their discriminative property. Using the same models but with different feature descriptors would have changed the rankings of our best models. CNN avoid the problem of feature selection, which makes them attractive for vision problems. 
