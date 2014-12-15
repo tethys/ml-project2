@@ -34,6 +34,8 @@ for i=1:5:nbr_users
     line([i,i],[Ylow(i),Yhigh(i)]);
 end
 
+print -dpdf MeanStdCountPerUser.pdf
+
 %% average count and std per artist
 sum_per_artist = sum(Ytrain,1);
 sum_one_per_artist = sum(indices,1);

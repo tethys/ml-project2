@@ -77,63 +77,23 @@ We note that the final MAE is composed of various values, small and large. In Fi
 We do not review here the details of ALS algorithm, the reader can consult the paper[cite] beforehand, since this was not the goal of this report.
 \textcolor{red}{TODO}
 
-Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
-
-\begin{minipage}{\textwidth}
-  \begin{minipage}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_lambda.pdf}
-    \captionof{figure}{Comparison of Train and Test errors with different lambda values}
-    \label{fig:ALS_lambdas}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
-	\centering
-    \includegraphics[clip, trim=4cm 9.2cm 3.5cm 9cm, width=\textwidth]{figures/ALS_features.pdf}
-    \captionof{figure}{Comparison of Train and Test errors with different features values}
-    \label{fig:ALS_features}
-    \end{minipage}
-  \end{minipage}
-  
-\begin{minipage}{\textwidth}
-  \begin{minipage}[b]{0.45\textwidth}
+Using 20 features and $lambda in [0.01,0.05,0.1,0.5,1]$ we obtain the results in table \ref{table:labda_choice} using 10-fold cross validation .The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
 \begin{center}
   \begin{tabular}{ |l | c | c| }
     \hline
-     lambda & MAE train & MAE test \\ \hline
-     0.01   & 0.088 ($\pm$  0.0008) &  1.591 ($\pm$ 0.015) \\ \hline
-     0.05  &  0.163 ($\pm$  895) &  0.901 ($\pm$  0.0061) \\ \hline
-     0.1     & 0.259 ($\pm$ 851)  & 0.822 ($\pm$ 0.0012) \\ \hline
-     0.5    & 0.660  ( $\pm$ 851) & 0.864 ($\pm$  0.0016)\\ \hline
-     1       & 1.035 ($\pm$ 842) & 1.222($\pm$  0.0010)\\ \hline
-     1.5    & 1.493 ($\pm$ 837) & 1.670($\pm$  0.0007) \\
+     lambda & RMSE train & RMSE test \\ \hline
+     0.01   & 5075 ($\pm$  1.0793e+10) & 1.13 ($\pm$ 0.05) \\ \hline
+     0.05  &  3355 ($\pm$  895)            &                1.14 ($\pm$  0.02)                   \\ \hline
+     0.1     & 3350 ($\pm$ 851)  & 1.58 ($\pm$ 0.06) \\ \hline
+     0.5    & 3341  ( $\pm$ 851)   &13.93 ($\pm$ 0.86)\\ \hline
+     1       & 3387 ($\pm$ 842)   &25.30($\pm$ 1.48)\\ \hline
+     1.5    & 3416 ($\pm$ 837) & 44.25($\pm$ 2.93) \\
     \hline
   \end{tabular}
   	\label{table:labda_choice}
-    \captionof{table}{Estimated Train and Test MAE for the two blob models.}
+    \captionof{table}{Estimated Train and Test RMSE for the two blob models.}
 \end{center}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
-\begin{center}
-  \begin{tabular}{ |l | c | c| }
-    \hline
-     features & MAE train & MAE test \\ \hline
-     10   & 0.253 ($\pm$  0.0017) &  0.927 ($\pm$ 0.0080) \\ \hline
-     20  &  0.163 ($\pm$  0.0009) &  0.901 ($\pm$  0.0061) \\ \hline
-     30     & 0.133 ($\pm$ 0.0009)  & 0.873 ($\pm$ 0.0047) \\ \hline
-     40    & 0.124  ( $\pm$ 0.0008) & 0.868 ($\pm$  0.0044)\\ \hline
-     50       & 0.121 ($\pm$ 0.0007) & 0.880($\pm$  0.0038)\\ \hline
-     100    & 0.122 ($\pm$ 0.0007) & 0.989($\pm$  0.0053) \\
-    \hline
-  \end{tabular}
-  	\label{table:feature_choice}
-    \captionof{table}{Estimated Train and Test MAE for the two blob models.}
-\end{center}
-    \end{minipage}
-  \end{minipage}
-  
-We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.05 for the next experiments.
+We can see that a value of lambda in the middle is a reaasonable choise, so we selected lambda to be 0.1 for the next experiments.
 Our algorithm did a good job training  with a RMSE less than  3 but a bad job on unseen data with RMSE > 3000, meaning it is overfitting 
 the training data and incrasing the value of lambda, the regularization parameter did not help.
 
@@ -153,7 +113,7 @@ We notice that the test error across the 10 different splits of the cross valida
   \label{fig:new_plot}
 \end{figure}
 
-We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.05$ and repeteated the experiments with different seed.
+We varied the number of features from 10,20,30,40,50,100 with $\lambda = 0.1$ and repeteated the experiments with different seed.
  Giving train  between 1.24 increasing up to  2.4 for 19 features.  The test RMSE  
  was always in the interval [3569,3546]. None of this results results proved meaningful.
 
@@ -213,14 +173,13 @@ The initial friendship graph $Gtrain$ of $1776$ nodes and $22904$ edges containe
 Using the Gephi  \footnote{http://gephi.github.io/} tool we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
 These statistics were run so that we get an idea of the number of friendship clusters present. The number of connected components and of communities are similar with our choice of 20-30 clusters in KMeans .
 
-We have tried two approaches using the friendship information, one based on the mean average per user and one based on kmeans clustering of users.
+We have tried two approaches using the friendship information, one based on the mean average per user and one based on Kmeans clustering of users.
 
 \subsubsection{Baseline Methods}
 As a reference method, we predict for a missing value the global average of all the available counts, which gave us a MAE of 1.078($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
 
-\subsection{Average Friend Method}
-We sum up this approach as "You are the average of your friends".
-In mathematical terms, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends (sad).
+\subsection{Mean of Friends Method}
+ "You are the average of your friends". In this approach, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends (sad).
 
 \begin{table}[h]
   \centering
@@ -231,16 +190,18 @@ In mathematical terms, a prediction for a new user $Ystrong(u,a)$ is computed as
 \end{table}
 where $n\_fa$ is the cardinality of the set $\left\{ Ytrain(f,a)\neq0, f\in Friends(u)\right\}$
 
-For this setup  we obtain  1.52 ($pm$0.291) which is smaller than our global average baseline prediction.
-If we also take into account the friends of the friends of user u we obtain  a MAE of 1.08($\pm$ 0.041). This result is comparable with the global average result.
+For this setup  we obtain  1.52 ($\pm$0.29) which is smaller than our global average baseline prediction.
+If we also take into account the friends of the friends of user u we obtain  a MAE of 1.08($\pm$ 0.041). This result is comparable with tour best baseline solution.
 
 \subsubsection{KMeans}
-We cluster the users into 20 groups using the KMeans setup from Task 1
-and repeat the experiments. For a new user, we predict the count as the  mean of its friends' cluster. This gave us a MAE of
-1.08($\pm$ 0.04). This is similar with the best prediction from the above approach and with the baseline global average. 
-Although KMeans with 20 features behaves similar with the baseline global average, we decided to use this on our newly predicted data.
-
-We mention that we had other unsuccessful experiments where the clusters were updated with the mean of the unique values or using only the most common cluster (test MAE = 1.49), KMeans with 100 clusters (test MAE = 1.55). Same results obtained with 30 friends.
+We clustered the users into 20 groups using the KMeans setup from Task 1
+and repeated the experiments. For a new user,  we predict the count as the mean of its friends' clusters. This gave us a MAE of
+1.08($\pm$ 0.04). This is similar with the best prediction from the above approach and with the  global average baseline. Although KMeans with 20 clusters does not seem to outperform the other methods, we decided to use this on our newly predicted data.
+Increasing the number of clusters did not seem to help, as we obtained the same performance with 30 clusters and worse results with 100 clusters (test MAE = 1.55). 
+ 
+We mention that we had other unsuccessful experiments where the prediction was done using the mean of the unique friends'clusters or using only the most frequent cluster among friends (test MAE = 1.49).
 
 \subsection{Summary}
-Skwes the results, it is more important to have correct predictions on the users with hight counts. Looking back, we could have kep track of the max and median value of the test error to asses the accuracy of our results.
+Our proposed methods did not outperform the global average prediction, giving comparable performance. These results are not conclusive enough to say if friendship information is indeed correlated with users' music listening counts (we believe it is). As further steps, we could analyze the correlation of the friendship information of the old users with their listening history. Basically, we could try to predict weak entries using only friendship information, information which we actually did not use in Task 1. Another helpful analysis is to see a histogram of the individual errors and the characteristics of the users for which friendship information is not useful.
+
+\textcolor{red}{It is more important to have correct predictions on the users with hight counts. Looking back, we could have kep track of the max and median value of the test error to asses the accuracy of our results.}

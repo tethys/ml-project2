@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  12 DEC 2014 18:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  15 DEC 2014 00:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -311,11 +311,7 @@ Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count117
 \c@subtable=\count118
 )
-(./paper.aux
-
-LaTeX Warning: Label `fig:new_plot' multiply defined.
-
-)
+(./paper.aux)
 \openout1 = `paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -424,28 +420,28 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<figures/histYtrain_crop.pdf, id=117, 485.6544pt x 403.26659pt>
+<figures/histYtrain_crop.pdf, id=113, 485.6544pt x 403.26659pt>
 File: figures/histYtrain_crop.pdf Graphic file (type pdf)
 
 <use figures/histYtrain_crop.pdf>
 Package pdftex.def Info: figures/histYtrain_crop.pdf used on input line 33.
 (pdftex.def)             Requested size: 178.86702pt x 148.52327pt.
 
-<figures/histLogYtrain_crop.pdf, id=118, 492.1587pt x 403.26659pt>
+<figures/histLogYtrain_crop.pdf, id=114, 492.1587pt x 403.26659pt>
 File: figures/histLogYtrain_crop.pdf Graphic file (type pdf)
 
 <use figures/histLogYtrain_crop.pdf>
 Package pdftex.def Info: figures/histLogYtrain_crop.pdf used on input line 37.
 (pdftex.def)             Requested size: 178.86702pt x 146.56035pt.
 
-<figures/histCountPerUser.pdf, id=119, 480.59549pt x 406.88011pt>
+<figures/histCountPerUser.pdf, id=115, 480.59549pt x 406.88011pt>
 File: figures/histCountPerUser.pdf Graphic file (type pdf)
 
 <use figures/histCountPerUser.pdf>
 Package pdftex.def Info: figures/histCountPerUser.pdf used on input line 47.
 (pdftex.def)             Requested size: 178.86702pt x 151.43109pt.
 
-<figures/histCountPerArtist.pdf, id=120, 485.6544pt x 398.93044pt>
+<figures/histCountPerArtist.pdf, id=116, 485.6544pt x 398.93044pt>
 File: figures/histCountPerArtist.pdf Graphic file (type pdf)
 
 <use figures/histCountPerArtist.pdf>
@@ -461,7 +457,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 94.
 See the caption package documentation for explanation.
 
-<figures/distributionRMSE.pdf, id=5007, 499.3857pt x 375.80403pt>
+<figures/distributionRMSE.pdf, id=5003, 499.3857pt x 375.80403pt>
 File: figures/distributionRMSE.pdf Graphic file (type pdf)
 
 <use figures/distributionRMSE.pdf>
@@ -473,14 +469,14 @@ Package pdftex.def Info: figures/histCountPerArtist.pdf used on input line 109.
 
 (pdftex.def)             Requested size: 178.86702pt x 146.92627pt.
 
-<figures/als_train.pdf, id=5008, 487.09982pt x 390.25804pt>
+<figures/als_train.pdf, id=5004, 487.09982pt x 390.25804pt>
 File: figures/als_train.pdf Graphic file (type pdf)
 
 <use figures/als_train.pdf>
 Package pdftex.def Info: figures/als_train.pdf used on input line 123.
 (pdftex.def)             Requested size: 178.86702pt x 143.30347pt.
 
-<figures/als_test.pdf, id=5009, 493.60414pt x 381.58563pt>
+<figures/als_test.pdf, id=5005, 493.60414pt x 381.58563pt>
 File: figures/als_test.pdf Graphic file (type pdf)
 
 <use figures/als_test.pdf>
@@ -495,7 +491,7 @@ Underfull \hbox (badness 1360) in paragraph at lines 141--143
 eans with vary-ing val-ues from
  []
 
-<figures/kmeans_train_test.pdf, id=5051, 484.93173pt x 388.81262pt>
+<figures/kmeans_train_test.pdf, id=5048, 484.93173pt x 388.81262pt>
 File: figures/kmeans_train_test.pdf Graphic file (type pdf)
 
 <use figures/kmeans_train_test.pdf>
@@ -513,75 +509,98 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4 <./figures/als_train.pdf> <./figures/als_test.pdf>] [5 <./figures/kmeans_tr
-ain_test.pdf>]) (./PeopleTask.tex
-<figures/positive_image.pdf, id=5089, 326.6604pt x 273.1806pt>
-File: figures/positive_image.pdf Graphic file (type pdf)
-
-<use figures/positive_image.pdf>
-Package pdftex.def Info: figures/positive_image.pdf used on input line 11.
-(pdftex.def)             Requested size: 178.86702pt x 149.58284pt.
-
-<figures/negative_image.pdf, id=5090, 336.77818pt x 276.07141pt>
-File: figures/negative_image.pdf Graphic file (type pdf)
-
-<use figures/negative_image.pdf>
-Package pdftex.def Info: figures/negative_image.pdf used on input line 15.
-(pdftex.def)             Requested size: 178.86702pt x 146.62886pt.
- [6 <./figures/positive_image.pdf> <./figures/negative_image.pdf>] [7] <figures
-/SVM.pdf, id=5112, 374.3586pt x 302.08862pt>
+ain_test.pdf>]) (./PeopleTask.tex [6]
+<figures/SVM.pdf, id=5093, 374.3586pt x 302.08862pt>
 File: figures/SVM.pdf Graphic file (type pdf)
-
-<use figures/SVM.pdf>
-Package pdftex.def Info: figures/SVM.pdf used on input line 68.
+ <use figures/SVM.pdf>
+Package pdftex.def Info: figures/SVM.pdf used on input line 51.
 (pdftex.def)             Requested size: 194.76982pt x 157.17456pt.
- <figures/K_NN.pdf, id=5113, 508.7808pt x 413.3844pt>
+
+<figures/K_NN.pdf, id=5094, 508.7808pt x 413.3844pt>
 File: figures/K_NN.pdf Graphic file (type pdf)
-
-<use figures/K_NN.pdf>
-Package pdftex.def Info: figures/K_NN.pdf used on input line 73.
+ <use figures/K_NN.pdf>
+Package pdftex.def Info: figures/K_NN.pdf used on input line 56.
 (pdftex.def)             Requested size: 194.76982pt x 158.25462pt.
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
- [8 <./figures/SVM.pdf> <./figures/K_NN.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
 
-(./paper.aux)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7] <figures/NN-alpha.pdf, id=5107, 493.60411pt x 395.3169pt>
+File: figures/NN-alpha.pdf Graphic file (type pdf)
+
+<use figures/NN-alpha.pdf>
+Package pdftex.def Info: figures/NN-alpha.pdf used on input line 75.
+(pdftex.def)             Requested size: 194.76982pt x 155.9886pt.
+
+<figures/NN-2layers.pdf, id=5108, 497.21759pt x 397.485pt>
+File: figures/NN-2layers.pdf Graphic file (type pdf)
+
+<use figures/NN-2layers.pdf>
+Package pdftex.def Info: figures/NN-2layers.pdf used on input line 80.
+(pdftex.def)             Requested size: 194.76982pt x 155.70387pt.
+)
+Underfull \vbox (badness 6412) has occurred while \output is active []
+
+ [8 <./figures/SVM.pdf> <./figures/K_NN.pdf> <./figures/NN-alpha.pdf> <./figure
+s/NN-2layers.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
+ (./paper.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 58.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 58.
-Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 86EE9B2F4BE056D66223C06140AE3AE5;1662.
 
 
-LaTeX Warning: There were multiply-defined labels.
+Package rerunfilecheck Warning: File `paper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper.out':
+(rerunfilecheck)             Before: 2CD300F1E1EB003294E4630DD8DB84EA;1584
+(rerunfilecheck)             After:  2610601685807AC4893F0BB701461660;1585.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 58.
  ) 
 Here is how much of TeX's memory you used:
- 7958 strings out of 493117
- 118551 string characters out of 6135432
- 211475 words of memory out of 5000000
- 11251 multiletter control sequences out of 15000+600000
+ 7970 strings out of 493117
+ 118667 string characters out of 6135432
+ 212475 words of memory out of 5000000
+ 11258 multiletter control sequences out of 15000+600000
  25457 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,14n,39p,655b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local
-/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/
-2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
-1/urw/times/utmr8a.pfb>
-Output written on paper.pdf (8 pages, 1685580 bytes).
+ 37i,14n,39p,769b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.8} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.6} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.4} has been referenced but does not exist, r
+eplaced by a fixed one
+
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb>
+Output written on paper.pdf (9 pages, 1561651 bytes).
 PDF statistics:
- 5180 PDF objects out of 6186 (max. 8388607)
- 247 compressed objects within 3 object streams
- 47 named destinations out of 1000 (max. 500000)
- 261 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5191 PDF objects out of 6186 (max. 8388607)
+ 261 compressed objects within 3 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 253 words of extra memory for PDF output out of 10000 (max. 10000000)
 

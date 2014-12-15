@@ -10,7 +10,7 @@
 \BOOKMARK [2][-]{subsection.1.6}{Task 2}{section.1}% 10
 \BOOKMARK [3][-]{subsubsection.1.6.1}{Friendship information}{subsection.1.6}% 11
 \BOOKMARK [3][-]{subsubsection.1.6.2}{Baseline Methods}{subsection.1.6}% 12
-\BOOKMARK [2][-]{subsection.1.7}{Average Friend Method}{section.1}% 13
+\BOOKMARK [2][-]{subsection.1.7}{Mean of Friends Method}{section.1}% 13
 \BOOKMARK [3][-]{subsubsection.1.7.1}{KMeans}{subsection.1.7}% 14
 \BOOKMARK [2][-]{subsection.1.8}{Summary}{section.1}% 15
 \BOOKMARK [1][-]{section.2}{People Detection}{}% 16
@@ -21,5 +21,4 @@
 \BOOKMARK [2][-]{subsection.2.5}{Support Vector Machines}{section.2}% 21
 \BOOKMARK [2][-]{subsection.2.6}{K-NN classifier}{section.2}% 22
 \BOOKMARK [2][-]{subsection.2.7}{Neural Network}{section.2}% 23
-\BOOKMARK [2][-]{subsection.2.8}{Convolutional Neural Network}{section.2}% 24
-\BOOKMARK [2][-]{subsection.2.9}{Comparison}{section.2}% 25
+\BOOKMARK [2][-]{subsection.2.8}{Comparison}{section.2}% 24
