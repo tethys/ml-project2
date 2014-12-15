@@ -19,9 +19,7 @@ The results from the K-fold validation were not very satisfying, since the avera
 \subsection{Support Vector Machines}
 \noindent For this part of the experiments we used the LIBSVM 3.20\footnote{http://www.csie.ntu.edu.tw/~cjlin/libsvm/} toolbox that supports SVM with various kernels.  We performed analysis and K-fold validation on linear-kernel SVM, polynomial-kernel SVM with degrees 2 and 3, radial-basis-function SVM and sigmoid-kernel SVM. In all the models we used the prediction scores to compute the TPR and the FPR. A comparison of the various model is given in Fig \ref{fig:SVM}.
 
-We observe that the RBF SVM performs significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also oberving the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $10e{-3}$. The rest of the classifiers perform well for FPR greater than $10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.  Cubic SVM performed worse than Quadratic SVM probably due to overfitting on the training data.
-
-\noindent Moreover, in Table \ref{table:SVM_success} we present the average percentage of the successful classifications that were made during the K-fold validation:
+We observe that the RBF SVM performs significantly better. This fact can be seen not only by looking at the average TPR, equal to 0.893, but also oberving the whole range of the FPR, where the classifier gives better results than all of the other SVM models. The second best in performance is polynomial SVM with degree 2, which has very similar results with the RBF case for FPR greater than $10e{-3}$. The rest of the classifiers perform well for FPR greater than $10e{-2}$, with the exception of the linear case, which has quite good results for lower rates, too.  Cubic SVM performed worse than Quadratic SVM probably due to overfitting on the training data. We also present in Table \ref{table:SVM_success} the average percentage of the successful classifications that were made during the K-fold validation:
 \begin{table}[h]
   \centering
   \begin{tabular}{ | c | c | c | c | c | c |}
@@ -34,7 +32,7 @@ We observe that the RBF SVM performs significantly better. This fact can be seen
 \end{table}
 \subsection{K-NN classifier}
 \noindent For this experiments we used a KNN library, which we modified in order to compute and return as output not only the class labels, but also the scores of the prediction.
-We used Euclidean Distance as distance measure between samples and varied the number of neighbours between 5, 9, 15, 19 and 25. 
+We used Euclidean Distance as distance measure between samples and varied the number of neighbours between 5, 9, 15, 19, 25. 
 
 \noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. All the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. For FPR greater than  $10^{-3}$
 the algorithms perform similarly, resulting in almost overlapping curves.
@@ -60,7 +58,7 @@ The parameters we considered for our problem were the number of epochs, the lear
 
 Using cross validation for a network with just one hidden layer of 50 neurons we determined the learning parameter $\alpha$, which we later used for bigger network setups. Fig.\ref{fig:NNa}  shows the ROC curves for $\alpha$ in  $[0.01,0.1,1,10]$.
 
-The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100]$ and $[300,50]$. The smallest NN performed just slightly worse than the others for FPR less than $10^{-3}$, meaning we  can increase a bit the model complexity by adding more neurons per layer or more hidden layers.  We could have easily increased and test larger networks if it were not for the time and computational contraints. Not suprisingly, our best setup consists in the biggest network. We see that increasing the size of the network leads to smaller FPR and better performance in general, meaning we have not yet reached an overfitting point.
+The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100]$ and $[300,50]$. The smallest NN performed just slightly worse than the others for FPR less than $10^{-3}$, meaning we  can increase a bit the model complexity by adding more neurons per layer or more hidden layers.  We could have easily increased and test larger networks if it were not for the time and computational contraints. Not suprisingly, our best setup consists in the biggest network. We see that increasing the size of the network leads to smaller FPR in the range $10^{-4}$ -$10^{-2}$ and better performance in general. However, the improvements are rather small compared to the increased complexity that was added.
 
 \begin{figure}[h]
   \centering
@@ -78,5 +76,5 @@ The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha
 \end{figure}
 
 \subsection{Comparison}
-To sum up, the models that performed best on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe different setups (e.g. 3 intemediate layers) would have fitted better. 
+To sum up, the models that performed best on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe different setups (e.g. 3 intemediate layers or different activation functions) would have fitted better. 
 We note that our models depend on the discriminative power of the HOG features. Using the same models but with different feature descriptors would have changed the rankings of our best models. 
