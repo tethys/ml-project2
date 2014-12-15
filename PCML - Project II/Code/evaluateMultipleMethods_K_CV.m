@@ -40,7 +40,7 @@ fpr = zeros(M,K,size(labels,1));
 tpr = zeros(M,K,size(labels,1));
 
 if showPlot
-    figure;
+    fig1 = figure;
 end
 
 for i = 1 : M
@@ -64,5 +64,8 @@ if showPlot && ~isempty(legendNames)
         legendNames{i} = sprintf('%s: %.3f', legendNames{i}, tprAtWP_av(i));
     end
     
-    legend( legendNames, 'Location', 'Best' );
+    legend( legendNames, 'Location','southeast');
+    saveas(fig1, sprintf('%s,%s',legendNames{i},'.png'));
+    pdfname = sprintf('%s,%s',legendNames{i},'.pdf');
+    print('-dpdf',pdfname);
 end
