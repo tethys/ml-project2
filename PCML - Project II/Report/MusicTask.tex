@@ -3,14 +3,12 @@ Collaborative filtering is the part of recommender systems that predicts users' 
 We therefore decided to implement besides the common KNN, Kmeans also ALS \cite{Zhou:2008}, which uses only the known listening counts and avoids dependency on initial estimations.
 
 \subsection{Data description}
-The training data consists in a matrix $Ytrain$ of size $1774$x$15082$, corresponding to $1774$ users and $15802$ artists. Entry $Ytrain(i,j)$ expresses how many times user $i$ has listened to artist $j$. An entry of 0 means we do not have information for that $(user, artist, count)$ triple. We are also given the friendship graph of the $1774$ users stored as an adjacency matrix.
+The training data consists in a matrix $Ytrain$ of $1774$ users and $15802$ artists. Entry $Ytrain(i,j)$ expresses how many times user $i$ has listened to artist $j$. An entry of 0 means we do not have information for that $(user, artist, count)$ triple. We are also given the friendship graph of the $1774$ users stored as an adjacency matrix.
 
 \subsection{Exploratory Data Analysis}
 
 The matrix $Ytrain$ is very sparse with a density of only $0.26\%$, corresponding to $69617 (user, artist, count)$ triples. 
-The variance of the entries' values is very high, the maximum  being $352698$ and average listening count per user and per artist of $5.52$ and $5.46$ respectively. There were also $1262$ artists for which no information was provided.
-
-A histogram of all the listening counts tell us that the known entries follow a heavy tail distribution. The long tail contains a small number of popular items, the well-known artists, and the rest are located in the heavy tail. One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform.
+The variance of the entries' values is very high, the maximum  being $352698$ and average listening count per user and per artist of $5.52$ and $5.46$ respectively. There were also $1262$ artists for which no information was provided. \par \noindent A histogram of all the listening counts tell us that the known entries follow a heavy tail distribution. The large counts represent a small number of popular items, the well-known artists, and the rest are located in the long tail. One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform.
 \\
 \begin{table}[h]
   \centering
@@ -20,9 +18,8 @@ A histogram of all the listening counts tell us that the known entries follow a 
   \end{tabular}
 \end{table}
 
-In our case, we can choose $\lambda=0$ because our values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on error of the (user,artist,count) triples with very large counts.
-
-The results after data transformation can be seen in Fig \ref{fig:user_artist_distribution}. The distribution of the user counts and of the artist counts are closer to a normal distribution. We notice there are some far away entries with values greater than 10. These will have a higher impact on the untransformed data. 
+In our case, we can choose $\lambda=0$ because our values are very high and positive. This transformation will make the distances between listening counts much smaller and will reduce the influence on error of the $(user,artist,count)$ triples with very large counts.
+\par The results after the data transformation can be seen in Fig. \ref{fig:user_artist_distribution}. The distribution of the user counts and of the artist counts are closer to a normal distribution. We notice there are a few larger entries with values greater than 10. These will have a higher impact on the untransformed data evaluation. 
 
 %An off by 1 error here will have more impact than on the small entries.
 
@@ -50,32 +47,31 @@ The results after data transformation can be seen in Fig \ref{fig:user_artist_di
     \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
     \caption{}
   \end{subfigure}
-  \caption{Distribution per user (a) and per artist (b) log of listening count distribution}
+  \caption{Distribution of listening counts}
   \label{fig:user_artist_distribution}
 \end{figure}
 
  
-\subsection{Task 1}
-In all our experiments we used 10-fold cross validation and repeated the experiments twice. For the first task, we randomly omit 10 entries for every artist. Splitting the data was more difficult since we needed to make sure we do not remove all the entries for an artist. In the training data, if an artist has $m$ entries with $m < 10$, then we keep $m-1$ entries for testing, to still have one element for training.
- 
+\subsection{Task 1 - Weak Prediction}
+In all our experiments we used 10-fold cross validation and repeated the experiments twice. For the first task, we randomly omit 10 entries for every artist. Splitting the data was more difficult since we needed to make sure we do not remove all the entries for an artist. In the training data, if an artist has $m$ entries with $m < 10$, then we keep $m-1$ entries for testing, such that we still have at least one element for training.
  
 \subsection{Baseline}
-There are three simple basic predictions one can try: the global average count, the average count per user and the average count per artist prediction. All of these methods give similar MAE results:  1.1117($\pm$ 0.0079), 0.64($\pm$ 0.0042) and 1.2134($\pm$ 0.0092). 
+There are three simple basic predictions one can try: the global average count, the average count per user and the average count per artist prediction. All of these methods give similar MAE results:  1.11($\pm$ 0.0079), 0.64($\pm$ 0.0042) and 1.21($\pm$ 0.0092). User mean average performed twice better as it can be seen in Fig. 
 
 %We note that the final MAE is composed of various values, small and large. In Fig we can see a ploto of the MAE error terms in log format.
 
 \subsubsection{KNN}
-K-nearest neighbors (KNN) algorithm is the first approach we tried for task 1. In KNN, we try to find the most similar k number of users as nearest neighbors to a given user, and predict the listening count(s) of a user for a given artist. The algorithm has important step- calculating the similarity between users and analyzing the nearest neighbors to predict the listening count(s) of a given user. 
+K-nearest neighbors (KNN) algorithm is the first approach we tried for task 1. In KNN, we tried to find the most similar k users as nearest neighbors of a given user, and predict the listening count(s) of a user for a given artist. The algorithm has two important steps- calculating the similarity between users and analyzing the nearest neighbors to predict the listening count(s) of a given user. 
 
-For measuring similarity between two users, we used Pearson metric, where $C(u,v)$ holds common artist indices for both users, and $\bar{Y_u}, \bar{Y_v}$  are average listening count for user $u$ and $v$ respectively:
+For measuring similarity between two users, we used the Pearson metric. We note $C(u,v)$ holds the set of artists that is common users $u$ and $v$, and $\bar{Y_u}, \bar{Y_v}$  are average listening count for user $u$ and $v$ respectively:
 \begin{equation}
   similarity(u, v)=\frac{\sum_{i\in C(u,v)} (Y_{u,i} - \bar{Y_u})(Y_{v,i} - \bar{Y_v})}{\sqrt{\sum_{i\in C(u,v)} (Y_{u,i} - \bar{Y_{u}})^2} \sqrt{\sum_{i\in C(u,v)} (Y_{v,i} - \bar{Y_{v}})^2}}
 \end{equation}
-In recommendation phase, the following formula gives the predicted listening count of a user for an artist:
+In recommendation phase, the following formula gives the predicted listening count of user $u$ for artist $i$:
  \begin{equation}
-  p(u, i)=\frac{\sum_{k \in N} similarity(u, k) (Y_{k,i} - \bar{Y_k})}{\sum_{k \in N} | similarity(u, k) |} + \bar{Y_u}
+  p(u, i)=\frac{\sum_{k \in Neighbor(u)} similarity(u, k) (Y_{k,i} - \bar{Y_k})}{\sum_{k \in Neighbor(u)} | similarity(u, k) |} + \bar{Y_u}
 \end{equation}
-The best value for the number of nearest neighbors, $k$ depends upon the data. Therefore, we selected the good $k$ value by cross-validation technique among $[5, 10, 15, 20, 30]$, as can be seen from the figure \ref{fig:KNN_kvalues}. Increasing the $k$ value up to $10$ reduces both test and train error. After $10$, further increasing the value of $k$ doesn't change the test error much but continues to reduce the train error for our data. From the cross validation result, we notice the optimal number of nearest neighbors is k = 15.
+The best value for the number of nearest neighbors, $k$ depends on the data. Therefore, among $[5, 10, 15, 20, 30]$, we selected the best $k$ value using cross-validation technique. As can be seen from the Fig. \ref{fig:KNN_kvalues}, increasing the $k$ value up to $10$ reduces both test and train error. After $10$, further increasing the value of $k$ doesn't change the test error much but continues to reduce the train error for our data. From the cross validation result, we found the optimal number of nearest neighbors to be 15.
 
 \begin{figure}[h]
 \begin{minipage}{\textwidth}
@@ -107,12 +103,12 @@ The best value for the number of nearest neighbors, $k$ depends upon the data. T
   \end{minipage}
 \end{figure}
 
-The performance of the user-based KNN algorithm is not as good as alternative algorithms with the results of MAE $1.9$ for the test error. 
+With the best MAE of 1.5, the performance of the user-based KNN algorithm is not as good as alternative algorithms. 
 
 \subsubsection{ALS}
 We do not review here the details of ALS algorithm, the reader can consult the paper \cite{Zhou:2008} beforehand, since this was not the goal of this report.
 
-Using value of 20 for features and $lambda=[0.01,0.05,0.1,0.5,1]$ we obtain the results in figure \ref{fig:ALS_lambdas} using 10-fold cross validation. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
+Using 20 features and $\lambda$ varying in $[0.01,0.05,0.1,0.5,1]$ we obtain the results in Fig. \ref{fig:ALS_lambdas}. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
 
 \begin{figure}[h]
 \begin{minipage}{\textwidth}
@@ -146,7 +142,7 @@ Using value of 20 for features and $lambda=[0.01,0.05,0.1,0.5,1]$ we obtain the 
   \end{minipage}
 \end{figure}  
   
-We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we selected lambda to be $0.05$ for the next experiments. 
+We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we selected lambda $\lambda=0.05$ for the next experiments. 
 
 %We notice that the test error across the 10 different splits of the cross validation has values from 2000 to up to 6000. This is an artifact of the high listening counts present in the long tail and the randomness of the split.
 %\begin{figure}[h]
@@ -194,7 +190,7 @@ We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we se
   \label{fig:ALS_features}
 \end{figure}
   
-We varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$ and repeated the experiments with different seed (see figure \ref{fig:ALS_features}). Giving train error from $0.122$ increasing up to $0.253$ while the test MAE is $0.989$ for maximum and $0.88$ for minimum. Even though value $50$ for features is best for train error, we choose $40$ because it give better results for both test and train error. The results gave a MAE less than $0.8$ for the test error when $\lambda$ is $0.05$, and feature count is $40$.
+Keeping $\lambda$ fixed, we varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$ (see figure \ref{fig:ALS_features}), and the train error increased from $0.122$ to $0.253$ while the test MAE is $0.989$ for maximum and $0.88$ for minimum. Even though value $50$ for features is best for train error, we choosed $40$ because it give slightly better results on the test set. The best setup gave a MAE less than $0.8$ for the test error when $\lambda=0.05$, and feature count is $40$.
 
 %\begin{figure}[h]
 %  \centering
@@ -212,12 +208,12 @@ We varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$
 
 \subsubsection{K-means}
 %Although the number of artists is 10 times larger than the number of users, 
-In K-means approach, we chose to implement K-means with clustering of users instead of artists so that we can use the clusters obtained here also in Task 2.
+For this model, we chose to implement K-means with clustering of users instead of artists so that we can use the clusters obtained here also in Task 2.
 
 %, although that did not have a huge impact on our results.
-The missing entries in the matrix were initialized with the user average. We then sorted the users according to their average score and initialized the clusters with equally spaced samples from the sorted users array. The goal of this cluster initialization was to have a more equilibrated assignment of users to clusters and to make sure we have clusters from both highly active users and also from the less active.
+The missing entries in the matrix were initialized with the user average. We then sorted the users according to their average score and initialized the clusters with equally spaced samples from the sorted users array. The goal of this cluster initialization was to have a more equilibrated assignment of users to clusters and to make sure we have clusters from both highly active and also from less active users.
 
-Inspired by the friendship graph information, we tried K-means with varying values from [3,10,20,30,40,50,100]. We plot the mean train and test error using 10 fold cross validation in Fig \ref{fig:kmeans_final}. Using only 3 clusters both the train and the test error was high, while for 100 clusters the difference between train and test error became larger, giving signs of overfitting.
+Inspired by the friendship graph information, we tried K-means with varying number of clusters from [3,10,20,30,40,50,100]. We plot the mean train and test error using 10 fold cross validation in Fig \ref{fig:kmeans_final}. Using only 3 clusters both the train and the test error was high, while for 100 clusters the difference between train and test error became larger, giving signs of overfitting.
 
 %We noticed also the fact that sometimes the training error of Kmeans (reported by taking exp of data and RMSE) had small fluctuations and it was not always decreasig as the algorithm convergence properties would expect. This is due to the fact that Kmeans miminizes squared error but our cost is a little different since we transform the data using exp.
 
@@ -241,15 +237,15 @@ Inspired by the friendship graph information, we tried K-means with varying valu
   %\caption{bla bla}
 \end{figure}
 
-In all the experiments with more than 20 clusters obtained a test MAE close to 0.64. This was our best test MAE so far. For computational reasons, we picked 20 clusters for the next task.
+In all the experiments with more than 20 clusters we obtained a test MAE close to 0.64. This was our best test MAE so far. For computational reasons, we picked 20 clusters for the next task.
 
 We also tried K-Means in the update step, only the entries for artists that were known were updated. We expected this to perform better, but the algorithm had problems with overfitting, always giving a train error less than 0.4 (much less than the normal Kmeans) but a test error a bit over 0.7 (higher than the normal KMeans). This happened for all the cluster sizes we experimented with.
 
 \subsection{Comparison}
 
-KNN algorithm is very unsuccessful compared to other methods, even worst than baseline global average. The reason behind is that because the dataset we have is highly sparse, it’s very rare that two users have commonly listening counts. Therefore, the error is larger. This means that KNN has a limitation for predicting ratings in case of sparse matrix. Since the algorithm relies on the actual information of specific users, the gap between a given user and nearest neighbors is large. Even though ALS method give better results, it still doesn't perform better than baseline method and k-means. The K-means algorithm is similar to the expectation-maximization algorithm for mixtures of Gaussians in that they both attempt to find the centers of natural clusters in the data. Therefore, our results show that K-means appears to be a suitable approach for our problem, but we believe that such a success for k-means comes from that sparsity-reduction step where we initialize missing values. The k-means result is quite similar to the baseline method which is based on the average count per user. We can also note that this baseline method is also successful because the listening counts of artists given by a user is not so much variational from the mean (see figure \ref{fig:MeanStdCountPerUser}).
+KNN algorithm is unsuccessful compared to other methods, even worst than baseline global average. The possible reasons are the high sparsity of our data and the choice of the similarity measures. The dataset we have is highly sparse, it’s very rare that two users have commonly listening counts. Therefore, the error is larger. This means that KNN is limited in  performing well on sparse data matrices. Even though ALS method give better results, it still doesn't perform better than user mean baseline method and k-means. The K-means algorithm is similar to the expectation-maximization algorithm for mixtures of Gaussians meaning that they both attempt to find the centers of natural clusters in the data. Our results show that K-means appears to be a suitable approach for our problem, but we believe that its success for k-means comes from the sparsity-reduction step where we initialize missing values. The k-means result is quite similar to the baseline method which is based on the average count per user. We can also note that this baseline method is also successful because the listening counts of artists given by a user is not so much variational from the mean (see Fig.\ref{fig:MeanStdCountPerUser}).
 
-\subsection{Task 2 - Strong prediction}
+\subsection{Task 2}
 In this task we make predictions for a set of new users using their friendship information with a set of old users for which partial listening history is available. In other words, we try to see if there is a correlation between
 users' friendship and users' preference in music.
 
@@ -264,7 +260,7 @@ We have tried two approaches using the friendship information, one based on the 
 As a reference method, we predict for a missing value the global average of all the available counts, which gave us a MAE of 1.078($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
 
 \subsection{Mean of Friends Method}
- In this approach, a prediction for a new user $Ystrong(u,a)$ is computed as the average of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends:
+ "You are the average of your friends". In this approach, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends (sad).
 
 \begin{table}[h]
   \centering
@@ -287,5 +283,6 @@ Increasing the number of clusters did not seem to help, as we obtained the same 
 We mention that we had other unsuccessful experiments where the prediction was done using the mean of the unique friends'clusters or using only the most frequent cluster among friends (test MAE = 1.49).
 
 \subsection{Summary}
-Our proposed methods did not outperform the global average prediction, giving comparable performance. These results are not conclusive enough to say if friendship information is indeed correlated with users' music listening counts. As further steps, we could analyze the correlation of the friendship information of the old users with their listening history. Basically, we could try to predict weak entries using only friendship information, information which we actually did not use in Task 1. Another helpful analysis is to see a histogram of the individual errors and the characteristics of the users for which friendship information is not useful.
+Our proposed methods did not outperform the global average prediction, giving comparable performance. These results are not conclusive enough to say if friendship information is indeed correlated with users' music listening counts (we believe it is). As further steps, we could analyze the correlation of the friendship information of the old users with their listening history. Basically, we could try to predict weak entries using only friendship information, information which we actually did not use in Task 1. Another helpful analysis is to see a histogram of the individual errors and the characteristics of the users for which friendship information is not useful.
 
+\textcolor{red}{It is more important to have correct predictions on the users with hight counts. Looking back, we could have kep track of the max and median value of the test error to asses the accuracy of our results.}
