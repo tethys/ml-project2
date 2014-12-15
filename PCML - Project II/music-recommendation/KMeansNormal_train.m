@@ -1,13 +1,14 @@
 function [clusters,cluster_assignment, train_error] = KMeansNormal_train(Ytrain, C, maxIters)
 % Mandatory inputs:
-% Ytrain   : sparse matrix of true listening counts
-% C        : number of listening counts
+% Ytrain   : sparse matrix of true listening counts, size is
+%            nbr_users x nbr_artists
+% C        : number of user clusters
 % maxIters : number of cluster update steps
 %
 % Outputs:
 % clusters           : the C clusters per users of size nbr_clusters x
 %                      nbr_artists
-% cluster_assignment : an array of indices of size nbr_users x nbr_clusters
+% cluster_assignment : an array of cluster indices of size nbr_users x nbr_clusters
 % train_error        : mean absolute error of the non zero entries
 %
 
