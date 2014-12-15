@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  15 DEC 2014 16:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.24)  15 DEC 2014 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -408,157 +408,124 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
 
 (./MusicTask.tex
-
-Package natbib Warning: Citation `Zhou:2008' on page 1 undefined on input line 
-3.
-
-
-Underfull \hbox (badness 4752) in paragraph at lines 10--12
+Underfull \hbox (badness 4752) in paragraph at lines 10--11
 \OT1/ptm/m/n/10 The ma-trix $\OML/cmm/m/it/10 Ytrain$ \OT1/ptm/m/n/10 is very s
 parse with a den-sity of only $\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/
 10 26%$\OT1/ptm/m/n/10 , cor-re-spond-ing to
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[1
-
-{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<figures/histCountPerUser.pdf, id=115, 480.59549pt x 406.88011pt>
+<figures/histCountPerUser.pdf, id=106, 480.59549pt x 406.88011pt>
 File: figures/histCountPerUser.pdf Graphic file (type pdf)
 
 <use figures/histCountPerUser.pdf>
-Package pdftex.def Info: figures/histCountPerUser.pdf used on input line 46.
+Package pdftex.def Info: figures/histCountPerUser.pdf used on input line 33.
 (pdftex.def)             Requested size: 178.86702pt x 151.43109pt.
 
-<figures/histCountPerArtist.pdf, id=116, 485.6544pt x 398.93044pt>
+<figures/histCountPerArtist.pdf, id=107, 485.6544pt x 398.93044pt>
 File: figures/histCountPerArtist.pdf Graphic file (type pdf)
 
 <use figures/histCountPerArtist.pdf>
-Package pdftex.def Info: figures/histCountPerArtist.pdf used on input line 50.
+Package pdftex.def Info: figures/histCountPerArtist.pdf used on input line 37.
 (pdftex.def)             Requested size: 178.86702pt x 146.92627pt.
- [2 <./figures/histCountPerUser.pdf> <./figures/histCountPerArtist.pdf>]
-<figures/KNN_kvalue.pdf, id=1813, 597.23125pt x 845.1575pt>
+ [1
+
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./f
+igures/histCountPerUser.pdf> <./figures/histCountPerArtist.pdf>]
+<figures/KNN_kvalue.pdf, id=1816, 597.23125pt x 845.1575pt>
 File: figures/KNN_kvalue.pdf Graphic file (type pdf)
 
 <use figures/KNN_kvalue.pdf>
-Package pdftex.def Info: figures/KNN_kvalue.pdf used on input line 84.
+Package pdftex.def Info: figures/KNN_kvalue.pdf used on input line 71.
 (pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
 
-
-Package natbib Warning: Citation `Zhou:2008' on page 3 undefined on input line 
-113.
-
-<figures/ALS_lambda.pdf, id=1816, 597.23125pt x 845.1575pt>
+<figures/ALS_lambda.pdf, id=1820, 597.23125pt x 845.1575pt>
 File: figures/ALS_lambda.pdf Graphic file (type pdf)
 
 <use figures/ALS_lambda.pdf>
-Package pdftex.def Info: figures/ALS_lambda.pdf used on input line 121.
+Package pdftex.def Info: figures/ALS_lambda.pdf used on input line 108.
 (pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
 
-<figures/ALS_features.pdf, id=1818, 597.23125pt x 845.1575pt>
+<figures/ALS_features.pdf, id=1822, 597.23125pt x 845.1575pt>
 File: figures/ALS_features.pdf Graphic file (type pdf)
 
 <use figures/ALS_features.pdf>
-Package pdftex.def Info: figures/ALS_features.pdf used on input line 170.
+Package pdftex.def Info: figures/ALS_features.pdf used on input line 157.
 (pdftex.def)             Requested size: 178.86702pt x 152.53067pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <./figures/KNN_kvalue.pdf> <./figures/ALS_lambda.pdf>]
-Underfull \hbox (badness 1072) in paragraph at lines 220--221
-[]\OT1/ptm/m/n/10 Inspired by the friend-ship graph in-for-ma-tion, we tried K-
-means with vary-ing val-ues from
- []
-
-<figures/kmeans_train_test.pdf, id=1838, 484.93173pt x 388.81262pt>
+<figures/kmeans_train_test.pdf, id=1842, 484.93173pt x 388.81262pt>
 File: figures/kmeans_train_test.pdf Graphic file (type pdf)
 
 <use figures/kmeans_train_test.pdf>
-Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 230.
+Package pdftex.def Info: figures/kmeans_train_test.pdf used on input line 217.
 (pdftex.def)             Requested size: 166.94296pt x 133.84978pt.
 
-<figures/MeanStdCountPerUser.pdf, id=1839, 614.295pt x 794.97pt>
+<figures/MeanStdCountPerUser.pdf, id=1843, 614.295pt x 794.97pt>
 File: figures/MeanStdCountPerUser.pdf Graphic file (type pdf)
 
 <use figures/MeanStdCountPerUser.pdf>
-Package pdftex.def Info: figures/MeanStdCountPerUser.pdf used on input line 236
+Package pdftex.def Info: figures/MeanStdCountPerUser.pdf used on input line 223
 .
 (pdftex.def)             Requested size: 178.86702pt x 139.808pt.
- [4 <./figures/ALS_features.pdf> <./figures/MeanStdCountPerUser.pdf> <./figures
-/kmeans_train_test.pdf>]
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no € in font ptmr7t!
-Missing character: There is no ™ in font ptmr7t!
- [5])
-(./PeopleTask.tex [6] <figures/SVM.pdf, id=1889, 374.3586pt x 302.08862pt>
-File: figures/SVM.pdf Graphic file (type pdf)
 
-<use figures/SVM.pdf>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./figures/ALS_features.pdf> <./figures/MeanStdCountPerUser.pdf> <./figures
+/kmeans_train_test.pdf>] [5]) (./PeopleTask.tex [6]
+<figures/SVM.pdf, id=1891, 374.3586pt x 302.08862pt>
+File: figures/SVM.pdf Graphic file (type pdf)
+ <use figures/SVM.pdf>
 Package pdftex.def Info: figures/SVM.pdf used on input line 45.
 (pdftex.def)             Requested size: 194.76982pt x 157.17456pt.
- <figures/K_NN.pdf, id=1890, 508.7808pt x 413.3844pt>
-File: figures/K_NN.pdf Graphic file (type pdf)
 
-<use figures/K_NN.pdf>
+<figures/K_NN.pdf, id=1892, 508.7808pt x 413.3844pt>
+File: figures/K_NN.pdf Graphic file (type pdf)
+ <use figures/K_NN.pdf>
 Package pdftex.def Info: figures/K_NN.pdf used on input line 50.
 (pdftex.def)             Requested size: 194.76982pt x 158.25462pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] <figures/NN-alpha.pdf, id=1902, 493.60411pt x 395.3169pt>
+[7] <figures/NN-alpha.pdf, id=1904, 493.60411pt x 395.3169pt>
 File: figures/NN-alpha.pdf Graphic file (type pdf)
 
 <use figures/NN-alpha.pdf>
 Package pdftex.def Info: figures/NN-alpha.pdf used on input line 68.
 (pdftex.def)             Requested size: 194.76982pt x 155.9886pt.
 
-<figures/NN-2layers.pdf, id=1903, 497.21759pt x 397.485pt>
+<figures/NN-2layers.pdf, id=1905, 497.21759pt x 397.485pt>
 File: figures/NN-2layers.pdf Graphic file (type pdf)
 
 <use figures/NN-2layers.pdf>
 Package pdftex.def Info: figures/NN-2layers.pdf used on input line 73.
 (pdftex.def)             Requested size: 194.76982pt x 155.70387pt.
-)
-Underfull \vbox (badness 6412) has occurred while \output is active []
-
- [8 <./figures/SVM.pdf> <./figures/K_NN.pdf> <./figures/NN-alpha.pdf> <./figure
-s/NN-2layers.pdf>]
-No file paper.bbl.
-
-Package natbib Warning: There were undefined citations.
-
+) [8 <./figures/SVM.pdf> <./figures/K_NN.pdf> <./figures/NN-alpha.pdf> <./figur
+es/NN-2layers.pdf>] (./paper.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
-[9]
+ [9]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
  (./paper.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 58.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 58.
-
-
-Package rerunfilecheck Warning: File `paper.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `paper.out':
-(rerunfilecheck)             Before: 9C237D181A13B5907100C4376729C945;1646
-(rerunfilecheck)             After:  8941EF754033C4BC4FE582A0A0AEEA2D;1666.
+Package rerunfilecheck Info: File `paper.out' has not changed.
+(rerunfilecheck)             Checksum: 14B8B9B9C0DD7F36144E1E495B6E1429;1668.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 58.
  ) 
 Here is how much of TeX's memory you used:
- 7962 strings out of 493117
- 118446 string characters out of 6135432
+ 7971 strings out of 493117
+ 118554 string characters out of 6135432
  215475 words of memory out of 5000000
- 11252 multiletter control sequences out of 15000+600000
- 25457 words of font info for 58 fonts, out of 8000000 for 9000
+ 11256 multiletter control sequences out of 15000+600000
+ 27141 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,14n,39p,1358b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,14n,39p,894b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local
@@ -573,11 +540,12 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
 f-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/f
 onts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
-/urw/times/utmr8a.pfb>
-Output written on paper.pdf (9 pages, 768688 bytes).
+/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times
+/utmri8a.pfb>
+Output written on paper.pdf (9 pages, 778338 bytes).
 PDF statistics:
- 1987 PDF objects out of 2073 (max. 8388607)
- 268 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 1993 PDF objects out of 2073 (max. 8388607)
+ 273 compressed objects within 3 object streams
+ 51 named destinations out of 1000 (max. 500000)
  280 words of extra memory for PDF output out of 10000 (max. 10000000)
 
