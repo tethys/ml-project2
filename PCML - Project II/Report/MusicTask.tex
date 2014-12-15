@@ -1,5 +1,5 @@
 \subsection{Music recommendation}
-Collaborative filtering is the part of recommender systems that predicts users' preferences for particular items. The major challenge in predicting users'listening counts, as in our task, is that the available user-artist entries are usually too few and sometimes a method's performance relies on a good initial estimation of the unknown entries. 
+Collaborative filtering is the part of recommender systems that predicts users' preferences for particular items. The major challenge in predicting users' listening counts, as in our task, is that the available user-artist entries are usually too few and sometimes a method's performance relies on a good initial estimation of the unknown entries. 
 We therefore decided to implement besides the common KNN, Kmeans also ALS \cite{Zhou:2008}, which uses only the known listening counts and avoids dependency on initial estimations.
 
 \subsection{Data description}
@@ -7,8 +7,7 @@ The training data consists in a matrix $Ytrain$ of $1774$ users and $15802$ arti
 
 \subsection{Exploratory Data Analysis}
 
-The matrix $Ytrain$ is very sparse with a density of only $0.26\%$, corresponding to $69617 (user, artist, count)$ triples. 
-The variance of the entries' values is very high, the maximum  being $352698$ and average listening count per user and per artist of $5.52$ and $5.46$ respectively. There were also $1262$ artists for which no information was provided. \par \noindent A histogram of all the listening counts tell us that the known entries follow a heavy tail distribution. The large counts represent a small number of popular items, the well-known artists, and the rest are located in the long tail. One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform which is equivalent with taking the log of the data (ifor  high and positive values). This transformation will make the distances between listening counts much smaller and will reduce the influence on error of the $(user,artist,count)$ triples with very large counts.
+The matrix $Ytrain$ is very sparse with a density of only $0.26\%$, corresponding to $69617$ $(user, artist, count)$ triples. The variance of the entries' values is very high, the maximum  being $352698$ and average listening count per user and per artist of $5.52$ and $5.46$ respectively. There were also $1262$ artists for which no information was provided. \par \noindent A histogram of all the listening counts tell us that the known entries follow a heavy tail distribution. The large counts represent a small number of popular items, the well-known artists, and the rest are located in the long tail. One method to transform skewed data such that it becomes more gaussian distributed is to use the Box-Cox transform which is equivalent with taking the log of the data (for  high and positive values). This transformation will make the distances between listening counts much smaller and will reduce the influence on error of the $(user,artist,count)$ triples with very large counts.
 \par The results after the data transformation can be seen in Fig. \ref{fig:user_artist_distribution}. The distribution of the user counts and of the artist counts are closer to a normal distribution. We notice there are a few larger entries with values greater than 10. These will have a higher impact on the untransformed data evaluation. 
 
 %An off by 1 error here will have more impact than on the small entries.
@@ -29,11 +28,11 @@ The variance of the entries' values is very high, the maximum  being $352698$ an
 
 \begin{figure}[h]
   \centering
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.40\textwidth}
    \includegraphics[width=\textwidth]{figures/histCountPerUser.pdf}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.40\textwidth}
     \includegraphics[width=\textwidth]{figures/histCountPerArtist.pdf}
     \caption{}
   \end{subfigure}
@@ -46,8 +45,7 @@ The variance of the entries' values is very high, the maximum  being $352698$ an
 In all our experiments we used 10-fold cross validation and repeated the experiments twice. For the first task, we randomly omit 10 entries for every artist. Splitting the data was more difficult since we needed to make sure we do not remove all the entries for an artist. In the training data, if an artist has $m$ entries with $m < 10$, then we keep $m-1$ entries for testing, such that we still have at least one element for training.
  
 \subsection{Baseline}
-There are three simple basic predictions one can try: the global average count, the average count per user and the average count per artist prediction. All of these methods give similar MAE results:  1.11($\pm$ 0.0079), 0.64($\pm$ 0.0042) and 1.21($\pm$ 0.0092). User mean average performed twice as good as the others. As it can be seen in the user mean plot (Fig. \ref{fig:MeanStdCountPerUser}), the
-variation of the counts per user are pretty small, less than 1 for most of the users with a few exceptions. The mean of the listening counts of an user is a good estimate for a weak prediction  entry of that user.
+There are three simple basic predictions one can try: the global average count, the average count per user and the average count per artist prediction. These methods give following MAE results:  1.11 ($\pm$ 0.0079), 0.64 ($\pm$ 0.0042) and 1.21 ($\pm$ 0.0092). User mean average performed twice as good as the others. As it can be seen in the user mean plot (Fig. \ref{fig:MeanStdCountPerUser}), the variation of the counts per user are pretty small, less than 1 for most of the users with a few exceptions. The mean of the listening counts of an user is therefore a good estimate for a weak prediction  entry of that user.
 
 %We note that the final MAE is composed of various values, small and large. In Fig we can see a ploto of the MAE error terms in log format.
 
@@ -62,7 +60,7 @@ In recommendation phase, the following formula gives the predicted listening cou
  \begin{equation}
   p(u, i)=\frac{\sum_{k \in Neighbor(u)} similarity(u, k) (Ytrain_{k,i} - \bar{Y}train_k)}{\sum_{k \in Neighbor(u)} | similarity(u, k) |} + \bar{Y}train_u
 \end{equation}
-The best value for the number of nearest neighbors, $k$ depends on the data. Therefore, among $[5, 10, 15, 20, 30]$, we selected the best $k$ value using cross-validation technique. As can be seen from the Fig. \ref{fig:KNN_kvalues}, increasing the $k$ value up to $10$ reduces both test and train error. After $10$, further increasing the value of $k$ doesn't change the test error much but continues to reduce the train error for our data. From the cross validation result, we found the optimal number of nearest neighbors to be 15.
+The best value for the number of nearest neighbors, $k$ depends on the data. We selected the best $k$, among $[5, 10, 15, 20, 30]$, using cross-validation technique. As can be seen from the Fig. \ref{fig:KNN_kvalues}, increasing the $k$ value up to $10$ reduces both test and train error. After $10$, further increasing the value of $k$ doesn't change the test error much but continues to reduce the train error for our data. From the cross validation result, we found the optimal number of nearest neighbors to be 15.
 
 \begin{figure}[h]
 \begin{minipage}{\textwidth}
@@ -94,12 +92,10 @@ The best value for the number of nearest neighbors, $k$ depends on the data. The
   \end{minipage}
 \end{figure}
 
-With the best MAE of 1.5, the performance of the user-based KNN algorithm is not as good as alternative algorithms. 
+With the best MAE of 1.5, the performance of the user-based KNN algorithm is not as good as our baseline algorithms. 
 
 \subsubsection{ALS}
-We do not review here the details of ALS algorithm, the reader can consult the paper \cite{Zhou:2008} beforehand, since this was not the goal of this report.
-
-Using 20 features and $\lambda$ varying in $[0.01,0.05,0.1,0.5,1]$ we obtain the results in Fig. \ref{fig:ALS_lambdas}. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive.
+We do not review here the details of ALS algorithm, the reader can consult the paper \cite{Zhou:2008} beforehand, since this was not the goal of this report. Using 20 features and $\lambda$ varying in $[0.01,0.05,0.1,0.5,1]$ we obtain the results in Fig. \ref{fig:ALS_lambdas}. The experiments were repeated twice with different seed. We note that we stopped the update steps in the algorithm only after 5 iterations because the update step was very computational intensive. We observe that $\lambda = 0.05$ is reasonable choice and used in the next experiments.
 
 \begin{figure}[h]
 \begin{minipage}{\textwidth}
@@ -133,8 +129,6 @@ Using 20 features and $\lambda$ varying in $[0.01,0.05,0.1,0.5,1]$ we obtain the
   \end{minipage}
 \end{figure}  
   
-We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we selected lambda $\lambda=0.05$ for the next experiments. 
-
 %We notice that the test error across the 10 different splits of the cross validation has values from 2000 to up to 6000. This is an artifact of the high listening counts present in the long tail and the randomness of the split.
 %\begin{figure}[h]
 %  \centering
@@ -181,7 +175,7 @@ We can see that a value of $0.05$ for $\lambda$ is a reasonable choice, so we se
   \label{fig:ALS_features}
 \end{figure}
   
-Keeping $\lambda$ fixed, we varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$ (see figure \ref{fig:ALS_features}), and the train error increased from $0.122$ to $0.253$ while the test MAE is $0.989$ for maximum and $0.88$ for minimum. Even though value $50$ for features is best for train error, we choosed $40$ because it give slightly better results on the test set. The best setup gave a MAE less than $0.8$ for the test error when $\lambda=0.05$, and feature count is $40$.
+We varied the number of features from $10,20,30,40,50,100$ with $\lambda = 0.05$ (see Fig. \ref{fig:ALS_features}), and the train error increased from $0.122$ to $0.253$ while the test MAE reaches a maximum of $0.989$ and a minimum of $0.88$. Even though value $50$ for features is best for train error, we choosed $40$ because it gave slightly better results on the test set. The best setup gave a MAE less than $0.8$ for the test error when $\lambda=0.05$ and $40$ features.
 
 %\begin{figure}[h]
 %  \centering
@@ -230,12 +224,11 @@ Inspired by the friendship graph information, we tried K-means with varying numb
 
 In all the experiments with more than 20 clusters we obtained a test MAE close to 0.64. This was our best test MAE so far. For computational reasons, we picked 20 clusters for the next task.
 
-We also tried K-Means in the update step, only the entries for artists that were known were updated. We expected this to perform better, but the algorithm had problems with overfitting, always giving a train error less than 0.4 (much less than the normal Kmeans) but a test error a bit over 0.7 (higher than the normal KMeans). This happened for all the cluster sizes we experimented with.
+%We also tried K-Means in the update step, only the entries for artists that were known were updated. We expected this to perform better, but the algorithm had problems with overfitting, always giving a train error less than 0.4 (much less than the normal Kmeans) but a test error a bit over 0.7 (higher than the normal KMeans). This happened for all the cluster sizes we experimented with.
 
 \subsection{Comparison}
 
-KNN algorithm is unsuccessful compared to other methods, even worst than baseline global average. The possible reasons are the high sparsity of our data and the choice of the similarity measure. It is known that KNN has limitations in performing well on sparse data matrices. Even though ALS method gave better results, it still didn't perform better than user mean baseline method and k-means. The K-means algorithm is similar to the expectation-maximization algorithm for mixtures of Gaussians meaning that they both attempt to find the centers of natural clusters in the data. Our results show that K-means appears to be a suitable approach for our problem, but we believe that its good performance comes from the sparsity-reduction step where we initialize the missing values. Both KMeans and user mean average baseline perform well because
-they incorporate good estimates on the missing entries.
+KNN algorithm (MAE $1.49$) is unsuccessful compared to other methods, even worst than baseline global average. The possible reasons are the high sparsity of our data and the choice of the similarity measure. It is known that KNN has limitations in performing well on sparse data matrices. Even though ALS method (MAE $0.8$) gave better results, it still didn't perform better than user mean baseline method and k-means. The K-means algorithm (MAE $0.64$) is similar to the expectation-maximization algorithm for mixtures of Gaussians meaning that they both attempt to find the centers of natural clusters in the data. Our results show that Kmeans appears to be a suitable approach for our problem, but we believe that its good performance comes from the sparsity-reduction step where we initialize the missing values. Both Kmeans and user mean average baseline perform well because they incorporate good estimates on the missing entries.
 
 \subsection{Task 2}
 In this task we make predictions for a set of new users using their friendship information with a set of old users for which partial listening history is available. In other words, we try to see if there is a correlation between
@@ -249,10 +242,10 @@ These statistics were run so that we get an idea of the number of friendship clu
 We have tried two approaches using the friendship information, one based on the mean average per user and one based on Kmeans clustering of users.
 
 \subsubsection{Baseline Methods}
-As a reference method, we predict for a missing value the global average of all the available counts, which gave us a MAE of 1.078($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the above.
+As a reference method, we predict for a missing value the global average of all the available counts, which gave us a MAE of 1.078($\pm$0,044). Taking the average per artist gave us a MAE of 1.767($\pm$  0.09), significantly worse than the one above.
 
 \subsection{Mean of Friends Method}
- "You are the average of your friends". In this approach, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends'listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends (sad).
+In this approach, a prediction for a new user $Ystrong(u,a)$ is computed as the average count of its friends' listening counts $Ytrain(f,a)$ for that artist or global average count for an user without friends.
 
 \begin{table}[h]
   \centering
@@ -268,11 +261,9 @@ If we also take into account the friends of the friends of user $u$ we obtain  a
 
 \subsubsection{KMeans}
 We clustered the users into 20 groups using the KMeans setup from Task 1
-and repeated the experiments. For a new user,  we predict the count as the mean of its friends and its friends'friends clusters. This gave us a MAE of
-1.08($\pm$ 0.04). This is similar with the best prediction from the previous approach and with the  global average baseline. Although KMeans with 20 clusters does not seem to outperform the other methods, we decided to use this on our newly predicted data.
-Increasing the number of clusters did not seem to help, as we obtained the same performance with 30 clusters and worse results with 100 clusters (test MAE = 1.55). 
+and repeated the experiments. For a new user,  we predict the count as the mean of its friends and its friends' friends clusters. This gave us a MAE of 1.08($\pm$ 0.04). This is similar with the best prediction from the previous approach and with the  global average baseline. Although KMeans with 20 clusters does not seem to outperform the other methods, we decided to use this on our newly predicted data. Increasing the number of clusters did not seem to help, as we obtained the same performance with 30 clusters and worse results with 100 clusters (test MAE = 1.55). 
  
-We mention that we had other unsuccessful experiments where the prediction was done using the mean of the unique friends'clusters or using only the most frequent cluster among friends (test MAE = 1.49).
+%We mention that we had other unsuccessful experiments where the prediction was done using the mean of the unique friends'clusters or using only the most frequent cluster among friends (test MAE = 1.49).
 
 \subsection{Conclusions}
 Our proposed methods did not outperform the global average prediction, giving comparable performance. These results are not conclusive enough to say if friendship information is indeed correlated with users' music listening counts (we believe it is). As further steps, we could analyze the correlation of the friendship information of the old users with their listening history. Basically, we could try to predict weak entries using only friendship information, information which we actually did not use in Task 1. Another helpful analysis is to see a histogram of the individual errors and the characteristics of the users for which friendship information is not useful.
