@@ -255,7 +255,7 @@ users' friendship and users' preference in music.
 
 \subsubsection{Friendship information}
 The initial friendship graph $Gtrain$ of $1776$ nodes and $22904$ edges contained $22$ connected components, but the majority of the components contained just a few nodes.
-Using the Gephi  \footnote{http://gephi.github.io/} tool we were able to find some properties of the graph such as the number of communities, 32.  Out of these 32 communities, only 8 communities had more than 150 members.
+Using the Gephi  \footnote{http://gephi.github.io/} tool we were able to find some properties of the graph such as the number of communities, 32 (out of these, only 8  had more than 150 members).
 These statistics were run so that we get an idea of the number of friendship clusters present. The number of connected components and of communities are similar with our choice of 20-30 clusters in KMeans .
 
 We have tried two approaches using the friendship information, one based on the mean average per user and one based on Kmeans clustering of users.
@@ -275,12 +275,12 @@ As a reference method, we predict for a missing value the global average of all 
 \end{table}
 where $n\_fa$ is the cardinality of the set $\left\{ Ytrain(f,a)\neq0, f\in Friends(u)\right\}$
 
-For this setup  we obtain  1.52 ($\pm$0.29) which is smaller than our global average baseline prediction.
+For this setup  we obtained a test MAE=1.52 ($\pm$0.29) which is smaller than our global average baseline prediction.
 If we also take into account the friends of the friends of user $u$ we obtain  a MAE of 1.08($\pm$ 0.041). This result is comparable with our best baseline solution.
 
 \subsubsection{KMeans}
 We clustered the users into 20 groups using the KMeans setup from Task 1
-and repeated the experiments. For a new user,  we predict the count as the mean of its friends' clusters. This gave us a MAE of
+and repeated the experiments. For a new user,  we predict the count as the mean of its friends and its friends'friends clusters. This gave us a MAE of
 1.08($\pm$ 0.04). This is similar with the best prediction from the previous approach and with the  global average baseline. Although KMeans with 20 clusters does not seem to outperform the other methods, we decided to use this on our newly predicted data.
 Increasing the number of clusters did not seem to help, as we obtained the same performance with 30 clusters and worse results with 100 clusters (test MAE = 1.55). 
  

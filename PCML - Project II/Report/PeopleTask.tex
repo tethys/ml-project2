@@ -36,7 +36,7 @@ We observe that the RBF SVM performs significantly better. This fact can be seen
 \noindent For this experiments we used a KNN library, which we modified in order to compute and return as output not only the class labels, but also the scores of the prediction.
 We used Euclidean Distance as distance measure between samples and varied the number of neighbours between 5, 9, 15, 19 and 25. 
 
-\noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. There we observe that all of the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. For FPR greater than  $10^{-3}$
+\noindent Fig \ref{fig:K_NN} presents the resulting ROC curves that were created using the scores obtained from the K-fold validation runs. All the classifiers show good performance, especially for FPR greater than $10^{-3}$. Only the 9-NN classifier seems to perform a bit worse for FPR between $10^{-4}$ and $10^{-3}$. For FPR greater than  $10^{-3}$
 the algorithms perform similarly, resulting in almost overlapping curves.
 
 \begin{figure}[h]
@@ -56,11 +56,11 @@ the algorithms perform similarly, resulting in almost overlapping curves.
 \subsection{Neural Network}
 Neural Networks are powerfull tools able to learn complex decisions boundaries. Besides the computational cost, their major drawback is the high amount of parameters needed to be tuned for a specific problem, making them harder to train.
 
-The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 passes through the data. The activation functions were also kept fixed to tanh (hyperbolic tangent) and sigmoid at the last layer. 
+The parameters we considered for our problem were the number of epochs, the learning rate $\alpha$ (parameter in gradient descent update), the number of hidden layers and their size. We fixed the batch size to 50 and the number of epochs to 10, since we experimentally saw that the error starts to converge after 10 passes through the data. The activation functions were also kept fixed to tanh (hyperbolic tangent) for intermediate layers and sigmoid at the last layer. 
 
 Using cross validation for a network with just one hidden layer of 50 neurons we determined the learning parameter $\alpha$, which we later used for bigger network setups. Fig.\ref{fig:NNa}  shows the ROC curves for $\alpha$ in  $[0.01,0.1,1,10]$.
 
-The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100]$ and $[300,50]$. From the results in Fig \ref{fig:NNb} we could see that the smallest NN performed worse than the others, meaning we  can increase the model complexity by adding more neurons per layer or more hidden layers.  We could have easily increased and test larger networks if it were not for the time and computational contraints. Not suprisingly, our best setup consists in the biggest network. We see that increasing the size of the network leads to less FPR and better performance in general, meaning we have not yet reached an overfitting point.
+The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha=1$, we experimented with 2 hidden layers of sizes $[50,20],[100,50],[200,50],[200,100]$ and $[300,50]$. The smallest NN performed just slightly worse than the others for FPR less than $10^{-3}$, meaning we  can increase a bit the model complexity by adding more neurons per layer or more hidden layers.  We could have easily increased and test larger networks if it were not for the time and computational contraints. Not suprisingly, our best setup consists in the biggest network. We see that increasing the size of the network leads to smaller FPR and better performance in general, meaning we have not yet reached an overfitting point.
 
 \begin{figure}[h]
   \centering
@@ -78,5 +78,5 @@ The results for bigger setups can be seen in Fig \ref{fig:NNb}. Choosing $\alpha
 \end{figure}
 
 \subsection{Comparison}
-To sum up, the models that performed best on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe different setups would have fitted better. 
+To sum up, the models that performed best on the people detection data were SVM (with RBF or Quadratic kernels) followed closely by KNN with 25 neighbours and Euclidean Distance as metric. Although our NN setups performed just a little better than Penalized Logistic Regression, we believe different setups (e.g. 3 intemediate layers) would have fitted better. 
 We note that our models depend on the discriminative power of the HOG features. Using the same models but with different feature descriptors would have changed the rankings of our best models. 
