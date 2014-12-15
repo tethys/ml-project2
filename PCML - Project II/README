@@ -1,6 +1,6 @@
 For the Music task we had our own implementation for all the methods.
 
-KMeans -> KMeansNormal_train.m for task 1
+KMeans -> KMeans_train.m for task 1
           predict_kmeans_strong.m for task 2
 KNN ->
 
