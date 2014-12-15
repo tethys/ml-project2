@@ -18,7 +18,7 @@ end
 %% Iteration
 K = 5;
 
-rng(8339);
+%rng(8339);
 N = size(labels,1);
 idx = randperm(N);
 Nk = floor(N/K);
